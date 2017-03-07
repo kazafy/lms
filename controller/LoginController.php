@@ -26,7 +26,7 @@ class LoginController
             $user =(unserialize($_COOKIE['user']));
             session_start();
             $_SESSION["user"] = $user;
-            header("Location: http://localhost/blog/home/");
+            header("Location: http://localhost/lms/home/");
 //                        include "view/home.php";
             exit();
 
@@ -67,7 +67,7 @@ class LoginController
                             setcookie("user", serialize($user)); // 86400 = 1 day
                             exit();
                         }
-                        header("Location: http://localhost/blog/home/");
+                        header("Location: http://localhost/lms/home/");
 //                        include "view/home.php";
                         exit();
                         break;

@@ -64,7 +64,7 @@ class MainController
         }else{
             echo  " not allowed ";
         }
-        header("Location: http://localhost/blog/home/");
+        header("Location: http://localhost/lms/home/");
         exit();
 
 
@@ -109,7 +109,7 @@ class MainController
 
             $postController = new PostController();
             if($postController->updatePost($post)){
-                header("Location: http://localhost/blog/home/");
+                header("Location: http://localhost/lms/home/");
                 exit();
             };
 
@@ -156,7 +156,7 @@ class MainController
 
                 if(empty($errors)==true){
                     move_uploaded_file($file_tmp,"uploads/".$file_name);
-                    $post->setImg("/blog/uploads/".$file_name);
+                    $post->setImg("/lms/uploads/".$file_name);
                 }else{
                     $imgErr = " cant upload the image !";
                     $valide = false;
@@ -181,7 +181,7 @@ class MainController
 
                 $postController = new PostController();
                 if($postController->savePost($post)){
-                    header("Location: http://localhost/blog/home/");
+                    header("Location: http://localhost/lms/home/");
                     exit();
                 };
 

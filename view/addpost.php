@@ -13,7 +13,7 @@ include "nav.php";
 
 <div class="container">
 <div class="row">
-<form action="/blog/admin/post/add/" method="post" enctype="multipart/form-data">
+<form action="/lms/admin/post/add/" method="post" enctype="multipart/form-data">
     <div class="input-field col s12">
         <textarea name="header" rows="250" id="header" class="materialize-textarea"></textarea>
         <label for="header">Header</label>
@@ -40,7 +40,7 @@ include "nav.php";
     </div>
 
     <input class="right btn-flat" id="submit" name="submit" value="save" type="submit"></input>
-    <a href="/blog/home/" class="right btn-flat" >cancel</a>
+    <a href="/lms/home/" class="right btn-flat" >cancel</a>
 
 </form>
 </div>

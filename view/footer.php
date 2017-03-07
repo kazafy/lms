@@ -10,7 +10,7 @@
 <!--        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>-->
 <!--    </ul>-->
 
-    <a href="/blog/admin/post/add/" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+    <a href="/lms/admin/post/add/" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
 
 </div>
 

@@ -10,7 +10,7 @@ include "nav.php";
 
 
 ?>
-<form name="myform" id="myform" action="/blog/admin/user/update/" method="post" >
+<form name="myform" id="myform" action="/lms/admin/user/update/" method="post" >
     <table class="highlight centered bordered">
         <thead>
         <tr>
@@ -34,7 +34,7 @@ include "nav.php";
                     echo "<td><input type='text' name='phone' value='" . $user->getPhone() . "'></td>";
                     echo "<td><input type='text' name='type' value='" . $user->getType() . "'></td>";
                     echo "<td><a onclick='submitform(".$user->getId().");'   class='waves-effect waves-light btn'>save</a></td>";
-                    echo "<td><a href='/blog/admin/user/list/' class='waves-effect waves-light btn'>cancel</a></td>";
+                    echo "<td><a href='/lms/admin/user/list/' class='waves-effect waves-light btn'>cancel</a></td>";
                     echo "</tr>";
 
                 }else{
@@ -45,8 +45,8 @@ include "nav.php";
                     echo "<td>". $user->getPhone() ."</td>";
                     echo "<td>". $user->getType() ."</td>";
 //                    echo "<td><a onclick='submitform(".$user->getId().");'   class='waves-effect waves-light btn'>edit</a></td>";
-                    echo "<td><a href='/blog/admin/user/update/" . $user->getId() . "'  class='waves-effect waves-light btn'>Edit</a></td>";
-                    echo "<td><a href='/blog/admin/user/delete/" . $user->getId() . "' class='waves-effect waves-light btn'>Del</a></td>";
+                    echo "<td><a href='/lms/admin/user/update/" . $user->getId() . "'  class='waves-effect waves-light btn'>Edit</a></td>";
+                    echo "<td><a href='/lms/admin/user/delete/" . $user->getId() . "' class='waves-effect waves-light btn'>Del</a></td>";
                     echo "</tr>";
                 }
 

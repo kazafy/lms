@@ -13,7 +13,7 @@ include "nav.php";
 
 <div class="container">
     <div class="row">
-        <form action="/blog/admin/post/update/<?php echo $post->getId()?>" method="post" enctype="multipart/form-data">
+        <form action="/lms/admin/post/update/<?php echo $post->getId()?>" method="post" enctype="multipart/form-data">
             <div class="input-field col s12">
                 <textarea name="header" rows="250" id="header" class="materialize-textarea">
                     <?php echo $post->getHeader(); ?>
@@ -36,7 +36,7 @@ include "nav.php";
             </div>
 
             <input class="right btn-flat" id="submit" name="submit" value="save" type="submit"></input>
-            <a href="/blog/home/" class="right btn-flat" >cancel</a>
+            <a href="/lms/home/" class="right btn-flat" >cancel</a>
 
         </form>
     </div>

@@ -53,15 +53,15 @@ include "nav.php";
                                 {
                                     ?>
                                     <a class="right  btn-block waves-effect waves-light "
-                                       href="/blog/admin/post/update/<?php echo $block->getId();?>"><i class="material-icons">edit</i></a>
+                                       href="/lms/admin/post/update/<?php echo $block->getId();?>"><i class="material-icons">edit</i></a>
                                     <a class="right btn-block  waves-effect waves-light "
-                                       href="/blog/admin/post/delete/<?php echo $block->getId();?>"><i class="material-icons">delete</i></a>
+                                       href="/lms/admin/post/delete/<?php echo $block->getId();?>"><i class="material-icons">delete</i></a>
 
                                     <?php
                                 }elseif(! empty($user) && $user->getId() == $block->getUserId())
                                 {  ?>
                                     <a class="right btn-floating btn-large waves-effect waves-light green"
-                                       href="/blog/admin/post/update/<?php echo $block  ->getId();?>"><i class="material-icons">edit</i></a>
+                                       href="/lms/admin/post/update/<?php echo $block  ->getId();?>"><i class="material-icons">edit</i></a>
                                 <?php   }?>
 
 

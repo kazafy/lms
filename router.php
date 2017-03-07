@@ -25,7 +25,7 @@ function route($regex, $cb) {
 
 //echo  " lol ";
 
-route('/blog/api/login', function($matches){
+route('/lms/api/login', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
 
@@ -44,43 +44,43 @@ route('/blog/api/login', function($matches){
     exit;
 });
 
-route('/blog/', function($matches){
+route('/lms/', function($matches){
     include "index.php";
 });
-route('/blog/login/(.*)', function($matches){
+route('/lms/login/(.*)', function($matches){
     $loginController = new \controller\LoginController();
     $loginController->loginHandler();
     exit;
 });
 
-route('/blog/register/(.*)', function($matches){
+route('/lms/register/(.*)', function($matches){
     $registerController = new \controller\RegisterController();
     $registerController->registerHandler();
     exit;
 });
 
-route('/blog/admin/user/list/', function($matches){
+route('/lms/admin/user/list/', function($matches){
     checkAdmin();
     $adminController = new \controller\AdminController();
     $adminController->showUsers();
     exit;
 });
 
-route('/blog/admin/user/delete/(.*)', function($matches){
+route('/lms/admin/user/delete/(.*)', function($matches){
     checkAdmin();
     checkNumber($matches[1][0]);
     $adminController = new \controller\AdminController();
     $adminController->deleteUser((int)$matches[1][0]);
     exit;
 });
-route('/blog/admin/user/update/(.*)', function($matches){
+route('/lms/admin/user/update/(.*)', function($matches){
     checkAdmin();
     checkNumber($matches[1][0]);
     $adminController = new \controller\AdminController();
     $adminController->updateUser((int)$matches[1][0]);
     exit;
 });
-route('/blog/admin/post/delete/(.*)', function($matches){
+route('/lms/admin/post/delete/(.*)', function($matches){
     checkAdmin();
     checkNumber($matches[1][0]);
     $mainController =new \controller\MainController();
@@ -90,25 +90,25 @@ route('/blog/admin/post/delete/(.*)', function($matches){
 });
 
 
-route('/blog/admin/post/add/', function($matches){
+route('/lms/admin/post/add/', function($matches){
     checkLogin();
     $mainController =new \controller\MainController();
     $mainController->addPost();
     exit;
 });
 
-route('/blog/admin/post/update/(.*)', function($matches){
+route('/lms/admin/post/update/(.*)', function($matches){
     checkLogin();
     checkNumber($matches[1][0]);
     $mainController =new \controller\MainController();
     $mainController->updatePost($matches[1][0]);
     exit;
 });
-route('/blog/admin/post/list/', function($matches){
+route('/lms/admin/post/list/', function($matches){
 
 });
 
-route('/blog/admin/post/(.*)', function($matches){
+route('/lms/admin/post/(.*)', function($matches){
 //    checkAuth();
     $mainController = new \controller\MainController();
     checkNumber($matches[1][0]);
@@ -118,19 +118,19 @@ route('/blog/admin/post/(.*)', function($matches){
 
 
 
-route('/blog/admin/(.*)', function($matches){
+route('/lms/admin/(.*)', function($matches){
     checkAdmin();
 });
 
 
-route('/blog/home/(.*)', function($matches){
+route('/lms/home/(.*)', function($matches){
     $mainController = new \controller\MainController();
     $mainController->mainHandler();
     exit;
 });
 
 
-route('/blog/error', function($matches){
+route('/lms/error', function($matches){
     include "view/errorpage.php";
 
 });
@@ -140,7 +140,7 @@ route('/blog/error', function($matches){
 function checkAdmin(){
     session_start();
     if(!isset($_SESSION['user'])) {
-        header("Location: http://localhost/blog/login/");
+        header("Location: http://localhost/lms/login/");
     }
     else{
         $user = $_SESSION['user'];
@@ -154,7 +154,7 @@ function checkAdmin(){
 function checkLogin(){
     session_start();
     if(!isset($_SESSION['user'])) {
-        header("Location: http://localhost/blog/login/");
+        header("Location: http://localhost/lms/login/");
     }
     else{
         $user = $_SESSION['user'];
@@ -164,18 +164,18 @@ function checkLogin(){
 function checkNumber($number){
 
     if( ! is_numeric($number)){
-        header("Location: http://localhost/blog/error");
+        header("Location: http://localhost/lms/error");
     }
 }
 
 
-route('/blog/logout/', function($matches){
+route('/lms/logout/', function($matches){
     session_start();
     echo  "logout";
     session_destroy();
     unset($_COOKIE['user']);
     setcookie('user', null, -1, '/');
-    header("Location: http://localhost/blog/home/");
+    header("Location: http://localhost/lms/home/");
     exit;
 });
 ?>
