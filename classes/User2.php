@@ -3,9 +3,9 @@
 
 require_once("Model.php");
 
-class User extends Model{
+class User2 extends Model{
 
-public $tablename="User";
+public $tablename="Type";
 private $id="id";
 
 

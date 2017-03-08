@@ -5,9 +5,9 @@
 
 require_once("Model.php");
 
-class Category extends Model{
+class Comment extends Model{
 
-public $tablename="Category";
+public $tablename="Comment";
 private $id="id";
 
 
