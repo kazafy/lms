@@ -21,11 +21,13 @@ class LoginController
     function loginHandler()
     {
 
+          var_dump($_COOKIE);
 
-        if(isset($_COOKIE['user'])){
+        if(!empty($_COOKIE['user'])){
             $user =(unserialize($_COOKIE['user']));
             session_start();
             $_SESSION["user"] = $user;
+            echo  " login";
             header("Location: http://localhost/lms/home/");
 //                        include "view/home.php";
             exit();

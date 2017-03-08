@@ -172,9 +172,11 @@ function checkNumber($number){
 route('/lms/logout/', function($matches){
     session_start();
     echo  "logout";
+    $_SESSION["user"]=null;
     session_destroy();
-    unset($_COOKIE['user']);
+
     setcookie('user', null, -1, '/');
+    unset($_COOKIE['user']);
     header("Location: http://localhost/lms/home/");
     exit;
 });

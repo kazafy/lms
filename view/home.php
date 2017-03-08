@@ -60,7 +60,7 @@ include "nav.php";
                                     <?php
                                 }elseif(! empty($user) && $user->getId() == $block->getUserId())
                                 {  ?>
-                                    <a class="right btn-floating btn-large waves-effect waves-light green"
+                                    <a class="right btn-block  waves-effect waves-light "
                                        href="/lms/admin/post/update/<?php echo $block  ->getId();?>"><i class="material-icons">edit</i></a>
                                 <?php   }?>
 
