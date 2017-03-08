@@ -39,6 +39,16 @@ $query=$quer;
   return $prep->fetchAll(PDO::FETCH_CLASS,$classname);
 
 }
+
+public  function fetchobj($classname,$quer,$array){
+
+
+$query=$quer;
+  $prep = $this->db->prepare($query);
+ $prep->execute($array);
+  return $prep->fetchObject($classname);
+
+}
 public  function fetchqueryGen($quer,$array){
 
 

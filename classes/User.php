@@ -3,6 +3,8 @@ class User{
 private $id  ; 
 private $name  ;   
 private $email  ; 
+private $signature;
+private $picture;
 private $password  ;   
 private $creation_date;   
 private $state;      
@@ -32,17 +34,39 @@ $db= $page["db"];
 return $db->fetchAllAS('User','User');
       
   }
-public  function Fetchuserintome($uid){
-//global $page;
-//$db= $page["db"];
-//$altuser= $db->fetchquery('Comments',"SELECT * from User where id = :id ",array(":id"=>$uid));  
+public  function Fetchinto($uid){
+$this->copy(static::Fetchuser($uid));
+return $this;
 
   }
+  public static function Fetchuser($uid){
+
+global $page;
+$db= $page["db"];
+return $db->fetchobj('User',"SELECT * from User where id = :id ",array(":id"=>$uid));  
+
+
+
+  }
+  private  function copy ($obj){
+
+ foreach (get_object_vars($obj) as $key => $value) {
+
+
+
+            $this->$key = $value;
+        }
+
+
+
+  }
+
+
+
+
       public  function insertthisusermin(){
         global $page;
         $db= $page["db"];
-        
-
         $db->doquery("insert into User( name,email,password,state) values (:name,:email,:password,:state)",array(":name"=>$this->name,":email"=>$this->email,":password"=>$this->password,":state"=>$this->state,));
 $this->id=$db->lastid();
       

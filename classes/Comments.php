@@ -1,12 +1,12 @@
 <?php
 ini_set("display_errors", "1");
 ini_set("display_startup_errors", "1");
-class Comment{
+class Comments{
 private $id  ; 
-private $body;
-private $creation_date;
-private $creatorid;
- private $courseid  ;       
+ private $Creationdate; 
+ private $uid  ;       
+private $title;      
+private $body ;
 
   public function __get($property) {
     if (property_exists($this, $property)) {
@@ -65,22 +65,6 @@ $db->doquery("delete from  Posts where id = :id ",array(":id"=>$id));
 
       
   }
-  public  function insert(){
-
-
-
-  }
-    public  function update(){
-
-
-
-  }
-      public  function delete(){
-
-
-
-  }
-
 
 }
 
