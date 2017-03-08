@@ -2,6 +2,31 @@
 <?php
 ini_set("display_errors", "1");
 ini_set("display_startup_errors", "1");
+/*
+
+ _________________________________________
+/ Attention Please ! , This query builder \
+\ is NOT YET COMPLETED                    /
+ -----------------------------------------
+    \                                  ___-------___
+     \                             _-~~             ~~-_
+      \                         _-~                    /~-_
+             /^\__/^\         /~  \                   /    \
+           /|  O|| O|        /      \_______________/        \
+          | |___||__|      /       /                \          \
+          |          \    /      /                    \          \
+          |   (_______) /______/                        \_________ \
+          |         / /         \                      /            \
+           \         \^\\         \                  /               \     /
+             \         ||           \______________/      _-_       //\__//
+               \       ||------_-~~-_ ------------- \ --/~   ~\    || __/
+                 ~-----||====/~     |==================|       |/~~~~~
+                  (_(__/  ./     /                    \_\      \.
+                         (_(___/                         \_____)_)
+
+
+
+*/
 //select [selected]                                                           //done , Tested
 //from [table(s)]                                                            ////In progress , later
 //JOIN [table],(tables)                                                      ////done , Tested
@@ -16,7 +41,6 @@ ini_set("display_startup_errors", "1");
 
 
 
-
 class DynamicQueryBuilder{
 private $wherecondition="";
 private $joinstatement="";
@@ -26,6 +50,9 @@ private $selectclause="";
 private $groupclause="";
 private $orderclause="";
 private $havingclause="";
+private $setclause=[];
+private $valuesclause=[];
+private $actualvalsclause=[];
 private $table;
 private $map=[];
 public function __construct($table){
@@ -41,6 +68,9 @@ private function initall(){
         $this->groupclause="";
         $this->orderclause="";
         $this->havingclause="";
+        $this->map=[];
+        private $valuesclause=[];
+private $actualvalsclause=[];
 
 }
 private function where($part1,$part2,$args){
@@ -65,6 +95,53 @@ private function where($part1,$part2,$args){
        
         $createdqwpart.=$generatedp2;
         $this->wherecondition.=  $createdqwpart;
+        //echo   $this->wherecondition."\n";
+        //var_dump ($this->map);
+
+}
+private function valuesd($part1,$part2){
+
+       $generator=new Generator($part1,":");
+       $allmyargs=$generator(1);
+       $valuesclause[]=$part1;
+       $actualvalsclause[]=$allmyargs[0];
+}
+private function valuesg($part1){
+     $keys=array_keys($part1);
+     foreach ($part1 as $key=> $value){
+        $this->valuesd($key,$value);
+     }
+       
+}
+private function values($arg){
+
+        if(count($arg)==1)
+             $this->valuesd($arg[0],$arg[1]);
+        else
+             $this->valuesg($arg);    
+     
+
+}
+       
+
+private function set($part1,$part2){
+
+         $replacer=new Replacer("?");
+       
+        $matchoptionsp2="? = ?";
+        $createdqwpart="";
+       
+        $generatedp2=$replacer->replace($matchoptionsp2,[$part1],1);
+        $generator=new Generator($part1,":");
+       
+        $allmyargs=$generator(1);
+       $generatedp2=$replacer->replace(  $generatedp2, $allmyargs);
+       $this->map=array_merge($this->map, array_combine( $allmyargs,[$part1]));
+      // //echo "MAP";
+      // //var_dump( array_combine( $allmyargs,$futargs));
+       
+        $createdqwpart.=$generatedp2;
+        $this->setclause[]=  $createdqwpart;
         //echo   $this->wherecondition."\n";
         //var_dump ($this->map);
 
@@ -109,17 +186,17 @@ private function join($part1,$args)
 }
 private function select($args){
         if(count($args)>0)
-        $this->selectclause=implode(",",$args);
-        else 
+        $this->selectclause.=implode(",",$args);
+        else if(strlen($this->selectclause)==0)
         $this->selectclause="*";
         //echo  $this->selectclause;
 }
 private function order($args){
-        $this->orderclause=implode(",",$args);
+        $this->orderclause.=implode(",",$args);
            //echo  $this->orderclause;
 }
 private function group($args){
-        $this->groupclause=implode(",",$args);
+        $this->groupclause.=implode(",",$args);
            //echo  $this->groupclause;
 }
 private function having($part1,$part2,$args){
@@ -157,29 +234,32 @@ private function having($part1,$part2,$args){
         //(and|or|)where(eq|lt|gt|lte|gte|)
         if(preg_match("/^(and|or|)where(eq|lt|gt|lte|ne|gte|b|i|a)$/" ,$name, $matches ))
         {
-        $this->where($matches[1],$matches[2],$args);
+                $this->where($matches[1],$matches[2],$args);
         }
         else if(preg_match("/^(and|)join$/" ,$name, $matches ))
         {
-        $this->join($matches[1],$args);
+                $this->join($matches[1],$args);
         }
         else if(preg_match("/^(and|or|)on(eq|lt|gt|lte|ne|gte|b|i|a)$/" ,$name, $matches ))
         {
-        $this->on($matches[1],$matches[2],$args);
+                $this->on($matches[1],$matches[2],$args);
         }
         else if(preg_match("/^get$/" ,$name, $matches ))
         {
-        $this->select($args);
+                $this->select($args);
         }
-        else if(preg_match("/^order$/" ,$name, $matches ))
+        else if(preg_match("/^ord$/" ,$name, $matches ))
         {
-        $this->order($args);
+                $this->order($args);
         }
-        else if(preg_match("/^group$/" ,$name, $matches ))
+        else if(preg_match("/^grpby$/" ,$name, $matches ))
         {
-        $this->group($args);
+                 $this->group($args);
         }
-     
+        else if(preg_match("/^vals$/" ,$name, $matches ))
+        {
+                $this->values($args);
+        }
         else{
             
             
@@ -196,71 +276,64 @@ private function having($part1,$part2,$args){
  }
 
 
-$operations=[
-"up"=> function(){
-/*
-update $
 
-
-
-
-
-
-*/
-
-
-
-
-},
-"sel"=> function(){
-
-//select [selected]                                                           //done , Testing X
-//from [table(s)]                                                            ////In progress , later
-//JOIN [table],(tables)                                                      ////done , Tested
-//ON      [cond](and|or)[cond]                                              ////done , Tested
-//where [cond](and|or)[cond]                //cond => "a = , < , > ,>=,<= " ////done , Tested
-//groupby [thing(s)]                                                        ////done , Tested
-//having [cond] (and|or) [cond]                                            //// done , Tested
-//orderby [thing(s)]               
-
-
-
-},
-"ins"=> function(){
-
-
-
-
-
-},
-"del"=> function(){
+ function update(){
 
 $replacer=new Replacer("?");
+$strreplaced="Update ? values(?)";
+$query=$replacer->replace($strreplaced,[$this->table,implode(",",$this->valuesclause),implode(",",$this->actualvalsclause)]);
+echo $query;
+$this->initall();
+}
+ function select(){
 
+
+$replacer=new Replacer("?");
+$strreplaced="select from ? values(?)";
+$query=$replacer->replace($strreplaced,[$this->table,implode(",",$this->valuesclause),implode(",",$this->actualvalsclause)]);
+echo $query;
+$this->initall();
+
+}
+function insert(){
+
+$replacer=new Replacer("?");
+$strreplaced="insert into ?(?) values(?)";
+$query=$replacer->replace($strreplaced,[$this->table,implode(",",$this->valuesclause),implode(",",$this->actualvalsclause)]);
+echo $query;
+$this->initall();
+
+}
+ function delete(){
+
+
+$replacer=new Replacer("?");
+$strreplaced="Delete from ? where ?";
+$query=$replacer->replace($strreplaced,[$this->table,$this->whereclauses]);
+echo $query;
 $this->initall();
 
 }
 
 
-]
 
   public function __get($name) {
       $matches=[];
      if(preg_match("/^up$/" ,$name, $matches ))
         {
-        $this->up($matches[1],$matches[2],$args);
+        $this->update();
         }
          else if(preg_match("/^sel$/" ,$name, $matches ))
         {
-        $this->having($matches[1],$matches[2],$args);
+        $this->select();
         }
          else if(preg_match("/^del$/" ,$name, $matches ))
         {
-        $this->having($matches[1],$matches[2],$args);
+        $this->delete();
         }
         else if(preg_match("/^ins$/" ,$name, $matches ))
         {
-        $this->having($matches[1],$matches[2],$args);
+        $this->insert();
         }
         else{
 
