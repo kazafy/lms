@@ -127,20 +127,24 @@ private $pk;
 	}
 
     public  function delete(){	
-     $query="DELETE FROM {$this->tname} WHERE {$this->pk}=?";
-     echo $query;
-  $prep = self::$db->prepare($query);
-  $prep->execute([$this->properties[$this->pk]]);	
+        $query="DELETE FROM {$this->tname} WHERE {$this->pk}=?";
+        echo $query;
+        $prep = self::$db->prepare($query);
+        $prep->execute([$this->properties[$this->pk]]);	
     }
 
   /*
     public  static function insert(){
-	}
+	
+    }
      public  static function update(){
-	}
+	
+    }
      public  static function delete(){
-	}
-*/
+	
+    }
+    */
+
 
 	
 }
