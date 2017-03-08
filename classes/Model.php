@@ -1,4 +1,31 @@
 <?php
+/*
+
+ ________________________________________
+/ This file is operational ! you can use \
+| it by just extending it and you have a |
+\ model !                                /
+ ----------------------------------------
+   \         __------~~-,
+    \      ,'            ,
+          /               \
+         /                :
+        |                  '
+        |                  |
+        |                  |
+         |   _--           |
+         _| =-.     .-.   ||
+         o|/o/       _.   |
+         /  ~          \ |
+       (____@)  ___~    |
+          |_===~~~.`    |
+       _______.--~     |
+       \________       |
+                \      |
+              __/-___-- -__
+             /            _ \
+
+*/
 class Model{
 private $properties=[];
 private static $db;
