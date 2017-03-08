@@ -62,20 +62,30 @@ private $pk;
    }
    return $new;
 }
+	public  static function Fetch($id){
+  $me=new Reflectionclass(new static);
+        $allprop=$me->getDefaultProperties();
+       // var_dump($allprop);
+        $tname= $allprop["tablename"];
+        $pk= $allprop["id"];
+     $query="SELECT * from $tname where $pk = ?";
+  $prep = self::$db->prepare($query);
+ $prep->execute([$id]);
+   $all=$prep->fetchAll(PDO::FETCH_ASSOC);
+$row=$all[0];
+    $me=new static;
+    foreach ($me->properties as $key=>$value)
+    {
+        $me->properties[$key]=$row[$key];
+    }
+ 
+   return $me;
+    
+    }
 	
 	public  function Fetchinto($id){
-         $query="SELECT * from $tname";
-        $prep = self::$db->prepare($query);
-        $prep->execute();
-        $all=$prep->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($me->properties as $key=>$value)
-        {
-             $me->properties[$key]=$row[$key];
-        }
-        $query=$quer;
-        $prep = $this->db->prepare($query);
-        $prep->execute($array);
-        return $prep->fetchAll(PDO::FETCH_CLASS,$classname);
+      $targ=self::Fetch($id);
+      $this->properties=$targ->properties;
 
     
     
