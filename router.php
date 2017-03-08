@@ -5,7 +5,8 @@
  * Date: 24/02/17
  * Time: 11:05 ص
  */
-require_once 'model/User.php';
+require_once 'classes/Category.php';
+//require_once 'model/User.php';
 require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
 require_once 'controller/MainController.php';
@@ -25,29 +26,32 @@ function route($regex, $cb) {
 
 //echo  " lol ";
 
-route('/lms/api/login', function($matches){
-    header("Access-Control-Allow-Origin:*");
-    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
-
-//    $loginController = new \controller\LoginController();
-//    $loginController->loginHandler();
-     $user = new \model\User();
-     $user->setUsername("kazafy");
-    $user->setId(1);
-    $user->setImg("ddd");
-    $user->setEmail("dd");
-    $user->setPassword("d");
-    $user->setPhone("58");
-    $user->setType(1);
-//     echo $user;
-    echo json_encode($user);
-    exit;
-});
+//route('/lms/api/login', function($matches){
+//    header("Access-Control-Allow-Origin:*");
+//    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
+//
+////    $loginController = new \controller\LoginController();
+////    $loginController->loginHandler();
+//     $user = new \model\User();
+//     $user->setUsername("kazafy");
+//    $user->setId(1);
+//    $user->setImg("ddd");
+//    $user->setEmail("dd");
+//    $user->setPassword("d");
+//    $user->setPhone("58");
+//    $user->setType(1);
+////     echo $user;
+//    echo json_encode($user);
+//    exit;
+//});
 
 route('/lms/', function($matches){
+
+
     include "index.php";
 });
 route('/lms/login/(.*)', function($matches){
+
     $loginController = new \controller\LoginController();
     $loginController->loginHandler();
     exit;
@@ -144,7 +148,7 @@ function checkAdmin(){
     }
     else{
         $user = $_SESSION['user'];
-        if($user->getType()!=0){
+        if($user->type!=0){
             echo "you dont have permition";
             exit();
         }

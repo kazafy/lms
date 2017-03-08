@@ -12,8 +12,11 @@ use database\PostController;
 use database\UserController;
 use model\Post;
 use model\User;
+//use classes\Category;
+require_once 'classes/Category.php';
+require_once 'classes/User.php';
 
-require_once 'model/User.php';
+//require_once 'model/User.php';
 require_once 'database/PostController.php';
 
 
@@ -22,17 +25,17 @@ class MainController
 
     function mainHandler(){
 
+        $cat = new \Category();
+        $catList = \Category::Fetchall();
 
         session_start();
         $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
         if($user == null){
             session_destroy();
         }
-
         $postController = new PostController();
-        $blocks = $postController->getPostsList();
+        $blocks = \Category::Fetchall();
         include "view/home.php";
-
 
     }
 

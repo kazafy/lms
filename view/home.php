@@ -44,24 +44,24 @@ include "nav.php";
 
                         <div class="card-stacked">
                             <div class="card-content ">
-                                        <p class="truncate teal-text"> <?php echo $block->getText();?></p>
+                                        <p class="truncate teal-text"> <?php echo $block->name;?></p>
                             </div>
                             <div class="card-action">
                                 <a class="left" href="#">5 c</a>
 
-                                <?php if(! empty($user) && $user->getType()== 0)
+                                <?php if(! empty($user) && $user->type== 0)
                                 {
                                     ?>
                                     <a class="right  btn-block waves-effect waves-light "
-                                       href="/lms/admin/post/update/<?php echo $block->getId();?>"><i class="material-icons">edit</i></a>
+                                       href="/lms/admin/post/update/<?php echo $block->id;?>"><i class="material-icons">edit</i></a>
                                     <a class="right btn-block  waves-effect waves-light "
-                                       href="/lms/admin/post/delete/<?php echo $block->getId();?>"><i class="material-icons">delete</i></a>
+                                       href="/lms/admin/post/delete/<?php echo $block->id;?>"><i class="material-icons">delete</i></a>
 
                                     <?php
-                                }elseif(! empty($user) && $user->getId() == $block->getUserId())
+                                }elseif(! empty($user) && $user->id == $block->creatorid)
                                 {  ?>
                                     <a class="right btn-block  waves-effect waves-light "
-                                       href="/lms/admin/post/update/<?php echo $block  ->getId();?>"><i class="material-icons">edit</i></a>
+                                       href="/lms/admin/post/update/<?php echo $block->id;?>"><i class="material-icons">edit</i></a>
                                 <?php   }?>
 
 

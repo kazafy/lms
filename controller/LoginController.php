@@ -10,10 +10,11 @@ namespace controller;
 
 
 use database\UserController;
-use model\User;
 
-require_once 'model/User.php';
+
+//require_once 'model/User.php';
 require_once 'database/UserController.php';
+require_once 'classes/User.php';
 
 class LoginController
 {
@@ -22,34 +23,34 @@ class LoginController
     {
 
           var_dump($_COOKIE);
-
-        if(!empty($_COOKIE['user'])){
-            $user =(unserialize($_COOKIE['user']));
-            session_start();
-            $_SESSION["user"] = $user;
-            echo  " login";
-            header("Location: http://localhost/lms/home/");
-//                        include "view/home.php";
-            exit();
-
-        }
+    //
+    //        if(!empty($_COOKIE['user'])){
+    //            $user =(unserialize($_COOKIE['user']));
+    //            session_start();
+    //            $_SESSION["user"] = $user;
+    //            echo  " login";
+    //            header("Location: http://localhost/lms/home/");
+    ////                        include "view/home.php";
+    //            exit();
+    //
+    //        }
         if (isset($_REQUEST["submit"])) {
             $passwordErr = $emailErr = "";
             $valide = true;
 
-            $user = new User();
+            $user = new \User();
 
-            $user->setEmail($_REQUEST['email']);
-            $user->setPassword($_REQUEST['password']);
+            $user->email=$_REQUEST['email'];
+            $user->password=$_REQUEST['password'];
             $rememberMe= (isset($_REQUEST['rememberme']));
 
-            if (empty($user->getEmail())) {
+            if (empty($user->email)) {
                 $valide = false;
                 $emailErr = "Email required";
                 include "view/login.php";
                 exit();
             }
-            if (empty($user->getPassword())) {
+            if (empty($user->password)) {
                 $valide = false;
                 $passwordErr = "password required";
                 include "view/login.php";
@@ -58,8 +59,8 @@ class LoginController
 
             if ($valide) {
 
-                $userController = new UserController();
-                $result = $userController->login($user);
+//                $userController = new UserController();
+                $result = \User::fetchemail($user->email);
                 switch ($result) {
                     case 1:
                         session_start();

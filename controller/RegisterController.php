@@ -8,10 +8,11 @@
 
 namespace controller;
 use database\UserController;
-use model\User;
+//use model\User;
 
-require_once 'model/User.php';
+//require_once 'model/User.php';
 require_once 'database/UserController.php';
+require_once 'classes/User.php';
 
 class RegisterController
 {
@@ -21,35 +22,36 @@ class RegisterController
 
         if (isset($_REQUEST["submit"])) {
             $passwordErr = $emailErr = $usernameErr="";
-            $valide = true;
-            $user = new User();
-            $user->setEmail($_REQUEST['email']);
-            $user->setPassword($_REQUEST['password']);
-            $user->setUsername($_REQUEST['username']);
 
-            if (empty($user->getEmail())) {
+            $valide = true;
+            $user = new \User();
+            $user->email=$_REQUEST['email'];
+            $user->password=$_REQUEST['password'];
+            $user->name=$_REQUEST['username'];
+            $user->state = 1;
+            if (empty($user->name)) {
                 $valide = false;
                 $usernameErr = "username required";
             }
-
-            if (empty($user->getEmail())) {
+            if (empty($user->email)) {
                 $valide = false;
                 $emailErr = "Email required";
             }
-
-            if (empty($user->getPassword())) {
+            if (empty($user->password)) {
                 $valide = false;
                 $passwordErr = "password required";
             }
+
+
+
 
             if ($valide) {
 
                 $userController = new UserController();
 
-                $user->setType(1);
-                $user->setPhone(rand(10000, 112000));
+//                $user->setType(1);
 
-                $result = $userController->register($user);
+                $result = $user->insert();
                 switch ($result) {
                     case 1:
                         session_start();

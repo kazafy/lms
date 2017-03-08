@@ -8,7 +8,7 @@
                 <ul>
                     <li><a class="active" href="/lms/home/">Home</a></li>
                     <?php if(isset($user) && !empty($user)){
-                            if ($user->getType()== 0){
+                            if ($user->state == 1){
                         ?>
                         <li><a href="/lms/admin/user/list/">Control Panel</a></li>
                                 <?php }?>
