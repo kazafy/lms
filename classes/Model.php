@@ -36,7 +36,7 @@ class Model{
 
         $dbhost="localhost";
         $dbname="Project";
-        $uname="root";
+        $uname="kazafy";
         $password="";
 
         $me=new Reflectionclass($this);
@@ -135,7 +135,7 @@ class Model{
         // var_dump($allprop);
         $query="SELECT * from $tname where $parta = ?";
         $prep = self::$db->prepare($query);
-        echo $query;
+    //    echo $query;
         $prep->execute([$partb]);
         $all=$prep->fetchAll(PDO::FETCH_ASSOC);
         $new=[];
@@ -196,13 +196,11 @@ class Model{
         $setstat=implode(",",$setstat);
         $vals=implode(",",$vals);
         $query="INSERT INTO {$this->tname}($setstat) values ($vals) ";
-        echo $query;
         $prep = self::$db->prepare($query);
-        if( $prep->execute($exec)>0)
-            $this->properties[$this->pk]=self::$db->lastInsertId();;
+        if( $prep->execute($exec)>0) {
+            $this->fetchinto(self::$db->lastInsertId());//self::$db->lastInsertId();;
 
-
-
+        }
     }
     public  function update(){
 
@@ -218,14 +216,14 @@ class Model{
         $setstat=implode(",",$setstat);
         $exec[]=$this->properties[$this->pk];
         $query="UPDATE {$this->tname} SET $setstat WHERE {$this->pk}=?";
-        echo $query;
+//        echo $query;
         $prep = self::$db->prepare($query);
         $prep->execute($exec);
     }
 
     public  function delete(){
         $query="DELETE FROM {$this->tname} WHERE {$this->pk}=?";
-        echo $query;
+  //      echo $query;
         $prep = self::$db->prepare($query);
         $prep->execute([$this->properties[$this->pk]]);
     }

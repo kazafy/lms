@@ -8,7 +8,7 @@
 
 namespace model;
 
-
+require_once ("BlockInterface.php");
 class Post implements BlockInterface
 {
     private $id;

@@ -21,12 +21,6 @@ include "nav.php";
                 <a class="btn-flat"  >programming</a> >
                 <a class="btn-flat" >java</a>
             </div>
-<!--            <div class="card col l3">-->
-<!--                <h4 class="truncate">This is an extremely long title that will be truncated</h4>-->
-<!--            </div>-->
-<!--            <div class="card col l3">-->
-<!--                <h4 class="truncate">This is an extremely long title that will be truncated</h4>-->
-<!--            </div>        -->
         </div>
         <hr/>
 
@@ -39,23 +33,23 @@ include "nav.php";
 
                     <!--card-->
 
-                <div class="col s12 m6 l3">
+                <div class="col s12 m6 l3" >
                     <div class="card horizontal hoverable">
 
                         <div class="card-stacked">
-                            <div class="card-content ">
+                            <div class="card-content" onclick="window.location.replace('<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>/')">
                                         <p class="truncate teal-text"> <?php echo $block->name;?></p>
                             </div>
                             <div class="card-action">
                                 <a class="left" href="#">5 c</a>
 
-                                <?php if(! empty($user) && $user->type== 0)
+                                <?php  if(! empty($user) && $user->type == 0)
                                 {
                                     ?>
                                     <a class="right  btn-block waves-effect waves-light "
                                        href="/lms/admin/post/update/<?php echo $block->id;?>"><i class="material-icons">edit</i></a>
                                     <a class="right btn-block  waves-effect waves-light "
-                                       href="/lms/admin/post/delete/<?php echo $block->id;?>"><i class="material-icons">delete</i></a>
+                                       href="/lms/<?php echo $block->tablename;?>/delete/<?php echo $block->id;?>"><i class="material-icons">delete</i></a>
 
                                     <?php
                                 }elseif(! empty($user) && $user->id == $block->creatorid)
@@ -86,87 +80,6 @@ include "nav.php";
                         </div>
                 </div>
 
-                <!---->
-<!--            </div>-->
-<!--            <!--tab-->
-<!--            <div class="col s12 l4 ">-->
-<!---->
-<!---->
-<!--                <ul id="tabs-swipe-demo" class="tabs">-->
-<!--                    <li class="tab col l6"><a class="active" href="#test-swipe-1">Recently</a></li>-->
-<!--                    <li class="tab col l6"><a class="active" href="#test-swipe-2">Most Seen</a></li>-->
-<!--                </ul>-->
-<!--                <div id="test-swipe-1" class="col s12 ">-->
-<!---->
-<!--                    <ul class="collection">-->
-<!--                        <li class="collection-item avatar">-->
-<!--                            <i class="material-icons circle green">insert_chart</i>-->
-<!--                            <span class="title">Title</span>-->
-<!--                            <p>First Line <br> Second Line-->
-<!--                            </p>-->
-<!--                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-<!--                        </li>-->
-<!--                        <li class="collection-item avatar">-->
-<!--                            <i class="material-icons circle">folder</i>-->
-<!--                            <span class="title">Title</span>-->
-<!--                            <p>First Line <br> Second Line-->
-<!--                            </p>-->
-<!--                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-<!--                        </li>-->
-<!--                        <li class="collection-item avatar">-->
-<!--                            <i class="material-icons circle green">insert_chart</i>-->
-<!--                            <span class="title">Title</span>-->
-<!--                            <p>First Line <br> Second Line-->
-<!--                            </p>-->
-<!--                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-<!--                        </li>-->
-<!--                        <li class="collection-item avatar">-->
-<!--                            <i class="material-icons circle red">play_arrow</i>-->
-<!--                            <span class="title">Title</span>-->
-<!--                            <p>First Line <br> Second Line-->
-<!--                            </p>-->
-<!--                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!---->
-<!--                </div>-->
-<!--                <div id="test-swipe-2" class="col s12 ">-->
-<!--                    <ul class="collection">-->
-<!--                        <li class="collection-item avatar">-->
-<!--                            <i class="material-icons circle">folder</i>-->
-<!--                            <span class="title">Title</span>-->
-<!--                            <p>First Line <br> Second Line-->
-<!--                            </p>-->
-<!--                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-<!--                        </li>-->
-<!--                        <li class="collection-item avatar">-->
-<!--                            <i class="material-icons circle green">insert_chart</i>-->
-<!--                            <span class="title">Title</span>-->
-<!--                            <p>First Line <br> Second Line-->
-<!--                            </p>-->
-<!--                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-<!--                        </li>-->
-<!--                        <li class="collection-item avatar">-->
-<!--                            <i class="material-icons circle red">play_arrow</i>-->
-<!--                            <span class="title">Title</span>-->
-<!--                            <p>First Line <br> Second Line-->
-<!--                            </p>-->
-<!--                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-<!--                        </li>-->
-<!--                        <li class="collection-item avatar">-->
-<!--                            <i class="material-icons circle green">insert_chart</i>-->
-<!--                            <span class="title">Title</span>-->
-<!--                            <p>First Line <br> Second Line-->
-<!--                            </p>-->
-<!--                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!---->
-<!--                </div>-->
-<!---->
-<!---->
-<!---->
-<!--            </div>-->
         </div>
 
 

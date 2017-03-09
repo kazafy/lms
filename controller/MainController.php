@@ -33,11 +33,35 @@ class MainController
         if($user == null){
             session_destroy();
         }
+
         $postController = new PostController();
         $blocks = \Category::Fetchall();
         include "view/home.php";
 
     }
+
+    function showBlocks($blockName ,$className, $childclassName=null){
+
+        $ref = new \ReflectionClass($className);
+        $blok= $ref->newInstance();
+
+        $temp = $className::fetchname($blockName)[0];
+        $funprep="fetch".$className."id";
+        $blocks = $childclassName::$funprep($temp->id);
+        exit();
+
+
+
+    }
+
+
+    function deleteBlock($table,$id){
+        $ref = new \ReflectionClass($table);
+        $blok= $ref->newInstance();
+        $blok->id=$id;
+        $blok->delete();
+    }
+
 
     function postPreviewHandeler($id){
         session_start();

@@ -22,7 +22,7 @@ class LoginController
     function loginHandler()
     {
 
-          var_dump($_COOKIE);
+//          var_dump($_COOKIE);
     //
     //        if(!empty($_COOKIE['user'])){
     //            $user =(unserialize($_COOKIE['user']));
@@ -38,19 +38,19 @@ class LoginController
             $passwordErr = $emailErr = "";
             $valide = true;
 
-            $user = new \User();
+            $userTemp = new \User();
 
-            $user->email=$_REQUEST['email'];
-            $user->password=$_REQUEST['password'];
+            $userTemp->email=$_REQUEST['email'];
+            $userTemp->password=$_REQUEST['password'];
             $rememberMe= (isset($_REQUEST['rememberme']));
 
-            if (empty($user->email)) {
+            if (empty($userTemp->email)) {
                 $valide = false;
                 $emailErr = "Email required";
                 include "view/login.php";
                 exit();
             }
-            if (empty($user->password)) {
+            if (empty($userTemp->password)) {
                 $valide = false;
                 $passwordErr = "password required";
                 include "view/login.php";
@@ -60,30 +60,34 @@ class LoginController
             if ($valide) {
 
 //                $userController = new UserController();
-                $result = \User::fetchemail($user->email);
-                switch ($result) {
-                    case 1:
-                        session_start();
-                        $_SESSION["user"] = $user;
-                        if($rememberMe){
-                            echo "cooke";
-                            setcookie("user", serialize($user)); // 86400 = 1 day
-                            exit();
-                        }
-                        header("Location: http://localhost/lms/home/");
+                $user = \User::fetchemail($userTemp->email)[0];
+//                echo($userTemp->password);
+//                echo password_hash($userTemp->password,PASSWORD_DEFAULT);
+//                echo "<hr/>";
+//                var_dump(password_verify($user->password,$userTemp->password));
+//                echo "<hr/>";
+//                echo $user->password;
+//                echo "<hr/>";
+
+                var_dump(password_verify($userTemp->password,$user->password));
+                echo "<hr/>";
+                var_dump($user);
+                if(!empty($user) && password_verify($userTemp->password,$user->password)) {
+                    session_start();
+                    var_dump($user);
+                    $_SESSION["user"] = $user;
+                    if ($rememberMe) {
+                        echo "cooke";
+                        setcookie("user", serialize($user)); // 86400 = 1 day
+                        exit();
+                    }
+                    header("Location: http://localhost/lms/home/");
 //                        include "view/home.php";
-                        exit();
-                        break;
-                    case 0:
-                        $emailErr = "email not found";
-                        include "view/login.php";
-                        exit();
-                        break;
-                    case -1:
-                        $passwordErr = "password not correct";
-                        include "view/login.php";
-                        exit();
-                        break;
+                    exit();
+                }else{
+                    $emailErr = "email not found";
+                    include "view/login.php";
+                    exit();
                 }
 
             }

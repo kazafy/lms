@@ -2,10 +2,8 @@
 
 
 namespace database;
-use model\User;
 use database\Connection;
 use PDO;
-require_once 'model/User.php';
 require_once "database/Connection.php";
 /**
  * Created by PhpStorm.
@@ -56,17 +54,17 @@ class UserController
         return 1;
     }
 
-    function userList(){
-            $db = Connection::getConnection();
-            $query = "SELECT * FROM users ";
-
-            $statement = $db->prepare($query);
-
-            $statement->execute();
-            $users = $statement->fetchAll(PDO::FETCH_CLASS,'model\User');
-            return $users;
-
-    }
+//    function userList(){
+//            $db = Connection::getConnection();
+//            $query = "SELECT * FROM users ";
+//
+//            $statement = $db->prepare($query);
+//
+//            $statement->execute();
+//            $users = $statement->fetchAll(PDO::FETCH_CLASS,'model\User');
+//            return $users;
+//
+//    }
 
     function deleteUser($id){
 

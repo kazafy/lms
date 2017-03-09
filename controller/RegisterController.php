@@ -49,13 +49,21 @@ class RegisterController
 
                 $userController = new UserController();
 
-//                $user->setType(1);
+//                $user->type=0;
 
-                $result = $user->insert();
+                $user->password =password_hash($user->password,PASSWORD_DEFAULT);
+                try {
+                    $result = $user->insert();
+                    $result = 1;
+                }catch (\Exception $ex){
+                    $result = -1;
+                }
                 switch ($result) {
                     case 1:
                         session_start();
                         $_SESSION["user"] = $user;
+
+                        $blocks = \Category::Fetchall();
                         include "view/home.php";
                         exit();
                         break;

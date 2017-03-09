@@ -6,7 +6,6 @@
  * Time: 11:05 ص
  */
 require_once 'classes/Category.php';
-//require_once 'model/User.php';
 require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
 require_once 'controller/MainController.php';
@@ -94,6 +93,16 @@ route('/lms/admin/post/delete/(.*)', function($matches){
 });
 
 
+route('/lms/([^/]+)/delete/(.*)', function($matches){
+//    checkLogin();
+    var_dump($matches[1][0]);
+    var_dump($matches[2][0]);
+    $mainController =new \controller\MainController();
+    $mainController->deleteBlock($matches[1][0],$matches[2][0]);
+    exit;
+});
+
+
 route('/lms/admin/post/add/', function($matches){
     checkLogin();
     $mainController =new \controller\MainController();
@@ -120,6 +129,28 @@ route('/lms/admin/post/(.*)', function($matches){
     exit;
 });
 
+route("/lms/views/([^/]+)/([^/]*)(?:/){0,1}([^/]*)", function($matches){
+    $var =null;
+    $i=count($matches)-1;
+    for(; $i>0 ; $i--){
+
+        if(!empty($matches[$i][0]))
+        {
+            $var = $matches[$i][0];
+            break;
+        }
+    }
+    $blocls=['Category','Course','Material'];
+    $mainController = new \controller\MainController();
+    $mainController->showBlocks($var ,$blocls[--$i]);
+    exit;
+});
+
+route('/lms/views/', function($matches){
+    $mainController = new \controller\MainController();
+    $mainController->mainHandler();
+    exit;
+});
 
 
 route('/lms/admin/(.*)', function($matches){
@@ -168,7 +199,8 @@ function checkLogin(){
 function checkNumber($number){
 
     if( ! is_numeric($number)){
-        header("Location: http://localhost/lms/error");
+        include "view/errorpage.php";
+        exit();
     }
 }
 
