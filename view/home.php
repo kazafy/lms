@@ -81,18 +81,72 @@ include "nav.php";
                 </div>
 
                 <div id="newblock"  class="col s12 m6 l3 hide">
-                    <form id="idForm">
+                    <form id="idForm" >
 
                     <div class="card  hoverable">
+
                         <div class="card-content ">
-                            <input id="name" type='text'name='name' >
-                            <input id="desc" type='text'name='desc' >
+
+                            <div class="input-field">
+
+                            <input id="name" type="text" name='name' class="validate">
+                            <label for="name">name</label>
+                            </div>
+                            <div class="input-field">
+                            <input id="desc" type="text" name="desc" class="validate">
+                            <label for="desc">description</label>
+                            </div>
+                            <?php if($level == 0) {
+                                ?>
+                                <label for="cat">Select Category</label>
+                            <div class="input-field">
+                                <select id="cat" class="browser-default">
+                                    <?php
+                                        foreach ($catogeries as $category) {
+                                            ?>
+                                            <option value="<?= $category - id; ?>"><?= $category->name; ?></option>
+                                            <?php
+                                        }
+                                            ?>
+                                </select>
+                            </div>
+                            <div class="input-field">
+
+                            <?php
+                                foreach ($types as $type) {
+                                    ?>
+                                    <input type="checkbox" id="t<?php echo $type->id; ?>"/>
+                                    <label for="t<?php echo $type->id; ?>"><?php echo $type->name; ?></label>
+                                    <?php
+                            }
+                            }
+                            else if($level == 1){
+
+                                ?>
+
+                                <div class="file-field input-field">
+                                    <div class="btn-large">
+                                        <span>File</span>
+                                        <input type="file">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+
+                                <?php
+
+                            }
+                            ?>
+
                         </div>
                         <div class="card-action">
-                            <a onclick="removeMe()" class="btn-block waves-effect waves-light "><i class="material-icons">cancel</i></a>
-                            <input type="submit" class=" right btn-block  waves-effect waves-light "
-                               ><i class="material-icons">save</i></input>
+                            <button onclick="removeMe()" type="reset" class="btn-block waves-effect waves-light "><i class="material-icons">cancel</i></button>
+<!--                            <input type="submit" class="btn waves-effect waves-light"><i class="material-icons">save</i></input>-->
 
+                            <button class="btn-block right waves-effect waves-light" type="submit" name="action">
+                                <i class="material-icons right">save</i>
+                            </button>
                         </div>
                     </div>
                     </form>
@@ -110,7 +164,7 @@ include "nav.php";
 </div>
 
 <?php
-echo $level;
+
 include "footer.php";
 ?>
 <script>
@@ -128,7 +182,9 @@ include "footer.php";
         document.getElementById("name").value="";
         document.getElementById("desc").value="";
         var addCard = document.getElementById("addCard");
-        addCard.classList.toggle("hide")
+        addCard.classList.toggle("hide");
+        return;
+
     }
 
     $("#idForm").submit(function(e) {

@@ -15,6 +15,7 @@ use model\User;
 //use classes\Category;
 require_once 'classes/Category.php';
 
+require_once 'classes/Type.php';
 require_once 'classes/Course.php';
 require_once 'classes/Material.php';
 require_once 'classes/User.php';
@@ -37,28 +38,39 @@ class MainController
             session_destroy();
         }
 
-        $postController = new PostController();
         $blocks = \Category::Fetchall();
 
         include "view/home.php";
 
     }
 
-    function showBlocks($blockName ,$leve){
-        
-         $blocls=['Category','Course','Material'];
+    function showBlocks($blockName , $level){
 
-            switch($leve){
+        $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
+        $cat = new \Category();
+        $ty =new \Type();
+        $cour = new \Course();
+
+        $catogeries =\Category::Fetchall();
+        $types = \Type::Fetchall();
+        $courses = \Course::Fetchall();
+
+        $blocls=['Category','Course','Material'];
+
+        switch($level){
             case -1 :
+                $cat = new \Category();
+                $blocks = \Category::Fetchall();
 
-            $this->mainHandler($leve);
+                include "view/home.php";
+
              die;
             break;
 
             case 0 :
             case 1 :
-                $className=$blocls[$leve];
-                $childclassName=$blocls[$leve+1];
+                $className=$blocls[$level];
+                $childclassName=$blocls[$level+1];
             //die;
 
                 $ref = new \ReflectionClass($className);
@@ -68,14 +80,13 @@ class MainController
                 $funprep="fetch".$className."id";
 
                 $blocks = $childclassName::$funprep($temp->id);
-                $level = $leve;
                 include "view/home.php";
                 die;
 
                 break;
             case 2 :
-                    $className=$blocls[$leve];
-                    $childclassName=$blocls[$leve+1];
+                    $className=$blocls[$level];
+                    $childclassName=$blocls[$level+1];
                     $temp = $className::fetchname($blockName)[0];
                     echo $temp->path;
                     var_dump($_SERVER);
@@ -127,7 +138,7 @@ class MainController
     private function  addCategory($creatorid){
         $category = new \Category();
         $category->name = $_REQUEST['name'];
-        $category->description = "hi". $_REQUEST['desc'];
+        $category->description = $_REQUEST['desc'];
         $category->creatorid = $creatorid;
         $category->insert();
         $result =(object)["status"=>1];
@@ -136,10 +147,19 @@ class MainController
     }
     private function  addCourse(){
         $course = new \Course();
+        $course->name = $_REQUEST['name'];
+        $course->description = $_REQUEST['desc'];
 
+
+        
     }
     private function  addMaterial(){
         $material = new \Material();
+        $material->name = $_REQUEST['name'];
+        $material->description = $_REQUEST['desc'];
+
+
+
     }
 
 
