@@ -27,7 +27,7 @@ include "nav.php";
         <div class="row l11">
 
             <!--center -->
-            <div class="col s12  m12 l12 ">
+            <div id="center" class="col s12  m12 l12 ">
 
                 <?php foreach ($blocks as $block) { ?>
 
@@ -66,22 +66,41 @@ include "nav.php";
                 </div>
                 <!--card-->
                 <?php }?>
-                <div class="col s12 m6 l3">
-                        <div class="card horizontal hoverable">
-<!--                                <div class="card-content valign-wrapper">-->
-<!---->
-<!--                                    <h5 class="valign">+</h5>-->
-<!---->
+                <div id="addCard"  class="col s12 m6 l3">
+                        <div class="card  hoverable">
+                                <div onclick="addblock('<?php echo 0;//$level;?>');" class="card-content ">
+                                    <h3>+</h3>
+                                </div>
+<!--                                <div class="card-action">-->
+<!--                                    <a onclick="removeMe()" class="btn-block waves-effect waves-light "><i class="material-icons">cancel</i></a>-->
+<!--                                    <a class=" right btn-block  waves-effect waves-light "-->
+<!--                                       href="#"><i class="material-icons">save</i></a>-->
 <!---->
 <!--                                </div>-->
-                                <div class="card-action">
-                                    +
-                                </div>
                         </div>
                 </div>
 
-        </div>
+                <div id="newblock"  class="col s12 m6 l3 hide">
+                    <form id="idForm">
 
+                    <div class="card  hoverable">
+                        <div class="card-content ">
+                            <input id="name" type='text'name='name' >
+                            <input id="desc" type='text'name='desc' >
+                        </div>
+                        <div class="card-action">
+                            <a onclick="removeMe()" class="btn-block waves-effect waves-light "><i class="material-icons">cancel</i></a>
+                            <input type="submit" class=" right btn-block  waves-effect waves-light "
+                               ><i class="material-icons">save</i></input>
+
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+
+
+        </div>
 
     </div>
 </div>
@@ -93,3 +112,37 @@ include "nav.php";
 <?php
 include "footer.php";
 ?>
+<script>
+
+    function addblock(block) {
+
+        var card = document.getElementById("newblock");
+        card.classList.toggle("hide");
+        var addCard = document.getElementById("addCard");
+        addCard.classList.toggle("hide")
+    };
+    function removeMe() {
+        var card = document.getElementById("newblock");
+        card.classList.toggle("hide");
+        document.getElementById("name").value="";
+        document.getElementById("desc").value="";
+        var addCard = document.getElementById("addCard");
+        addCard.classList.toggle("hide")
+    }
+
+    $("#idForm").submit(function(e) {
+        var url = "/lms/api/add/0"; // the script where you handle the form input.
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#idForm").serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+                alert(data); // show response from the php script.
+            }
+        });
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+    });
+
+</script>
+

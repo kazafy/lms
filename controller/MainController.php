@@ -14,6 +14,8 @@ use model\Post;
 use model\User;
 //use classes\Category;
 require_once 'classes/Category.php';
+require_once 'classes/Course.php';
+require_once 'classes/Material.php';
 require_once 'classes/User.php';
 
 //require_once 'model/User.php';
@@ -47,9 +49,13 @@ class MainController
 
         $temp = $className::fetchname($blockName)[0];
         $funprep="fetch".$className."id";
-        $blocks = $childclassName::$funprep($temp->id);
+        echo $funprep;
+        $c = new \Course();
+        var_dump($c->fetchcategoryid("3"));
         exit();
-
+        $blocks = $childclassName::$funprep($temp->id);
+        var_dump($blocks);  
+        exit();
 
 
     }
@@ -60,6 +66,49 @@ class MainController
         $blok= $ref->newInstance();
         $blok->id=$id;
         $blok->delete();
+
+
+    }
+
+    function addBlock($level) {
+
+        $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
+
+        switch ($level){
+            case -1:
+                echo json_encode($this->addCategory($user->id));
+                break;
+            case 0:
+                echo json_encode($this->addCourse());
+                break;
+            case 1:
+                echo json_encode($this->addMaterial());
+                break;
+            default:
+                $error = "page not found";
+                include ("view/errorpage.php");
+                exit();
+        }
+
+
+
+    }
+    private function  addCategory($creatorid){
+        $category = new \Category();
+        $category->name = $_REQUEST['name'];
+        $category->description = "hi". $_REQUEST['desc'];
+        $category->creatorid = $creatorid;
+        $category->insert();
+        $result =(object)["status"=>1];
+        return $result;
+
+    }
+    private function  addCourse(){
+        $course = new \Course();
+
+    }
+    private function  addMaterial(){
+        $material = new \Material();
     }
 
 

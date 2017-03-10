@@ -44,6 +44,17 @@ function route($regex, $cb) {
 //    exit;
 //});
 
+
+route('/lms/api/add/(.*)', function($matches){
+    header("Access-Control-Allow-Origin:*");
+    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
+    checkLogin();
+    $mainController =new \controller\MainController();
+    $mainController->addBlock(-1);
+
+    exit;
+});
+
 route('/lms/', function($matches){
 
 
@@ -95,8 +106,8 @@ route('/lms/admin/post/delete/(.*)', function($matches){
 
 route('/lms/([^/]+)/delete/(.*)', function($matches){
 //    checkLogin();
-    var_dump($matches[1][0]);
-    var_dump($matches[2][0]);
+//    var_dump($matches[1][0]);
+//    var_dump($matches[2][0]);
     $mainController =new \controller\MainController();
     $mainController->deleteBlock($matches[1][0],$matches[2][0]);
     exit;
@@ -142,7 +153,7 @@ route("/lms/views/([^/]+)/([^/]*)(?:/){0,1}([^/]*)", function($matches){
     }
     $blocls=['Category','Course','Material'];
     $mainController = new \controller\MainController();
-    $mainController->showBlocks($var ,$blocls[--$i]);
+    $mainController->showBlocks($var ,$blocls[$i-1],$blocls[$i]);
     exit;
 });
 

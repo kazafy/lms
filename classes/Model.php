@@ -36,7 +36,7 @@ class Model{
 
         $dbhost="localhost";
         $dbname="Project";
-        $uname="root";
+        $uname="kazafy";
         $password="";
 
         $me=new Reflectionclass($this);
