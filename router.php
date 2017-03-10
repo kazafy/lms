@@ -5,12 +5,13 @@
  * Date: 24/02/17
  * Time: 11:05 ص
  */
+ini_set("display_errors", "1");
+ini_set("display_startup_errors", "1");
 require_once 'classes/Category.php';
 require_once 'controller/LoginController.php';
 require_once 'controller/RegisterController.php';
 require_once 'controller/MainController.php';
 require_once 'controller/AdminController.php';
-
 
 function route($regex, $cb) {
     $regex = str_replace('/', '\/', $regex);
@@ -140,7 +141,7 @@ route('/lms/admin/post/(.*)', function($matches){
     exit;
 });
 
-route("/lms/views/([^/]+)/([^/]*)(?:/){0,1}([^/]*)", function($matches){
+route("/lms/views/([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}", function($matches){
     $var =null;
     $i=count($matches)-1;
     for(; $i>0 ; $i--){
@@ -151,9 +152,10 @@ route("/lms/views/([^/]+)/([^/]*)(?:/){0,1}([^/]*)", function($matches){
             break;
         }
     }
-    $blocls=['Category','Course','Material'];
+   
     $mainController = new \controller\MainController();
-    $mainController->showBlocks($var ,$blocls[$i-1],$blocls[$i]);
+
+    $mainController->showBlocks($var ,--$i);
     exit;
 });
 

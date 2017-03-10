@@ -37,7 +37,7 @@ include "nav.php";
                     <div class="card horizontal hoverable">
 
                         <div class="card-stacked">
-                            <div class="card-content" onclick="window.location.replace('<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>/')">
+                            <div class="card-content" onclick="window.location.href='<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>/'">
                                         <p class="truncate teal-text"> <?php echo $block->name;?></p>
                             </div>
                             <div class="card-action">

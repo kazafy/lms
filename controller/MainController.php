@@ -14,6 +14,7 @@ use model\Post;
 use model\User;
 //use classes\Category;
 require_once 'classes/Category.php';
+
 require_once 'classes/Course.php';
 require_once 'classes/Material.php';
 require_once 'classes/User.php';
@@ -42,20 +43,47 @@ class MainController
 
     }
 
-    function showBlocks($blockName ,$className, $childclassName=null){
+    function showBlocks($blockName ,$leve){
+        
+         $blocls=['Category','Course','Material'];
 
-        $ref = new \ReflectionClass($className);
+switch($leve){
+case -1 :
+$this->mainHandler();
+ die;
+break;
+      
+case 0 :
+case 1 :
+
+
+   $className=$blocls[$leve];
+ $childclassName=$blocls[$leve+1];
+//die;
+
+ $ref = new \ReflectionClass($className);
         $blok= $ref->newInstance();
-
+        
         $temp = $className::fetchname($blockName)[0];
         $funprep="fetch".$className."id";
-        echo $funprep;
-        $c = new \Course();
-        var_dump($c->fetchcategoryid("3"));
-        exit();
+       
         $blocks = $childclassName::$funprep($temp->id);
-        var_dump($blocks);  
-        exit();
+         include "view/home.php";
+         die;
+
+break;
+case 2 :               
+          $className=$blocls[$leve];
+ $childclassName=$blocls[$leve+1];
+        $temp = $className::fetchname($blockName)[0];
+        echo $temp->path;
+        var_dump($_SERVER);
+       
+  header("Location: $temp->path");
+  die;
+
+}
+
 
 
     }
@@ -146,6 +174,7 @@ class MainController
 
     }
 
+/*
     function updatePost($id){
 
         $user = $_SESSION['user'];
@@ -270,7 +299,7 @@ class MainController
 
 
     }
-
+*/
 
 
 }
