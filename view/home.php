@@ -41,7 +41,7 @@ include "nav.php";
                                         <p class="truncate teal-text"> <?php echo $block->name;?></p>
                             </div>
                             <div class="card-action">
-                                <a class="left" href="#">5 c</a>
+                                <a class="left com" href="<?=$block->id?>">5 c</a>
 
                                 <?php  if(! empty($user) && $user->type == 0)
                                 {
@@ -109,12 +109,110 @@ include "nav.php";
 </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h4>Comments</h4>
+    <div id="modal_content" class="row">
+        <div class="row">
+        <h2>sdklfjsdlkfjsssssssfsdfdsfkjgfkhekagfuisdjkfsdkjhfkjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</h2>
+    </div>
+        <div class="row">
+        <h2>sdklfjsdlkfjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</h2>
+    </div>
+        <div class="row">
+        sdklfjsdlkfjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+    </div>
+      
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
 echo $level;
 include "footer.php";
 ?>
 <script>
+ $(document).ready(function(){
+  $('#modal').modal();
+  });
 
+
+ $(".com").click(
+   function(e){
+console.log($(this).attr('href'));
+  var url = "/lms/api/comments/get/"+$(this).attr('href');
+      $.ajax({
+            type: "POST",
+            url: url,
+            success: function(mydata)
+            {
+                mydata=JSON.parse(mydata);
+                console.log(mydata.length);
+ console.log(mydata[0]);
+
+                $("#modal_content").empty();
+                        for(i=0;i<mydata.length;i++){
+                                var elem=$("<div>");
+                               elem.append("<p>"+mydata[i].creatorname+":"+mydata[i].body);
+                                $("#modal_content").append(elem);
+
+
+                        }
+
+
+
+
+                alert("RECE"); // show response from the php script.
+                console.log(mydata);
+            }
+        });
+e.preventDefault();
+//$(this).
+
+$('#modal').modal('open');
+
+
+
+
+
+     
+ }
+ );
     function addblock() {
 
         var card = document.getElementById("newblock");

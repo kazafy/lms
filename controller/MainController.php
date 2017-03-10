@@ -18,7 +18,7 @@ require_once 'classes/Category.php';
 require_once 'classes/Course.php';
 require_once 'classes/Material.php';
 require_once 'classes/User.php';
-
+require_once 'classes/Comment.php';
 //require_once 'model/User.php';
 require_once 'database/PostController.php';
 
@@ -99,7 +99,26 @@ class MainController
 
 
     }
+    function sendcomments($id) {
+        
+        $commentlist=\Comment::fetchmaterialid($id);
+        $commentarray=array();
 
+        foreach($commentlist as $mycomment)
+        {
+            $currcomment=[];
+            $currcomment["id"]=$mycomment->id;
+             $currcomment["creatorid"]=$mycomment->creatorid;
+             $currcomment["body"]=$mycomment->body;
+              $currcomment["creatorname"]=\User::fetchid($mycomment->creatorid)[0]->name;
+            $commentarray[]=$currcomment;
+        }
+
+        echo json_encode($commentarray);
+       exit();
+
+
+    }
     function addBlock($level) {
 
 
