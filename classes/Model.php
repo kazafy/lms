@@ -36,7 +36,7 @@ class Model{
 
         $dbhost="localhost";
         $dbname="Project";
-        $uname="kazafy";
+        $uname="root";
         $password="";
 
         $me=new Reflectionclass($this);
@@ -103,10 +103,11 @@ class Model{
         // Note: value of $name is case sensitive.
         $me=new static;
         $matches=[];
+        $name=strtolower($name);
         //(and|or|)where(eq|lt|gt|lte|gte|)
         if(preg_match("/^fetch(.+)$/i" ,$name, $matches ))
         {
-
+            
             if(array_key_exists ($matches[1] ,$me->properties)){
 
                 return self::Fetchalpha($matches[1],$args[0]);
