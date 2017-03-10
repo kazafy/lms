@@ -68,7 +68,7 @@ include "nav.php";
                 <?php }?>
                 <div id="addCard"  class="col s12 m6 l3">
                         <div class="card  hoverable">
-                                <div onclick="addblock('<?php echo 0;//$level;?>');" class="card-content ">
+                                <div onclick="addblock();" class="card-content ">
                                     <h3>+</h3>
                                 </div>
 <!--                                <div class="card-action">-->
@@ -110,11 +110,12 @@ include "nav.php";
 </div>
 
 <?php
+echo $level;
 include "footer.php";
 ?>
 <script>
 
-    function addblock(block) {
+    function addblock() {
 
         var card = document.getElementById("newblock");
         card.classList.toggle("hide");
@@ -131,7 +132,7 @@ include "footer.php";
     }
 
     $("#idForm").submit(function(e) {
-        var url = "/lms/api/add/0"; // the script where you handle the form input.
+        var url = "/lms/api/add/"+"<?php echo $level;?>"; // the script where you handle the form input.
         $.ajax({
             type: "POST",
             url: url,

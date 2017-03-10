@@ -51,8 +51,7 @@ route('/lms/api/add/(.*)', function($matches){
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
     checkLogin();
     $mainController =new \controller\MainController();
-    $mainController->addBlock(-1);
-
+    $mainController->addBlock($matches[1][0]);
     exit;
 });
 

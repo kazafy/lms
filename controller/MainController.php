@@ -26,7 +26,7 @@ require_once 'database/PostController.php';
 class MainController
 {
 
-    function mainHandler(){
+    function mainHandler($level){
 
         $cat = new \Category();
         $catList = \Category::Fetchall();
@@ -39,6 +39,7 @@ class MainController
 
         $postController = new PostController();
         $blocks = \Category::Fetchall();
+
         include "view/home.php";
 
     }
@@ -47,42 +48,42 @@ class MainController
         
          $blocls=['Category','Course','Material'];
 
-switch($leve){
-case -1 :
-$this->mainHandler();
- die;
-break;
-      
-case 0 :
-case 1 :
+            switch($leve){
+            case -1 :
 
+            $this->mainHandler($leve);
+             die;
+            break;
 
-   $className=$blocls[$leve];
- $childclassName=$blocls[$leve+1];
-//die;
+            case 0 :
+            case 1 :
+                $className=$blocls[$leve];
+                $childclassName=$blocls[$leve+1];
+            //die;
 
- $ref = new \ReflectionClass($className);
-        $blok= $ref->newInstance();
-        
-        $temp = $className::fetchname($blockName)[0];
-        $funprep="fetch".$className."id";
-       
-        $blocks = $childclassName::$funprep($temp->id);
-         include "view/home.php";
-         die;
+                $ref = new \ReflectionClass($className);
+                $blok= $ref->newInstance();
 
-break;
-case 2 :               
-          $className=$blocls[$leve];
- $childclassName=$blocls[$leve+1];
-        $temp = $className::fetchname($blockName)[0];
-        echo $temp->path;
-        var_dump($_SERVER);
-       
-  header("Location: $temp->path");
-  die;
+                $temp = $className::fetchname($blockName)[0];
+                $funprep="fetch".$className."id";
 
-}
+                $blocks = $childclassName::$funprep($temp->id);
+                $level = $leve;
+                include "view/home.php";
+                die;
+
+                break;
+            case 2 :
+                    $className=$blocls[$leve];
+                    $childclassName=$blocls[$leve+1];
+                    $temp = $className::fetchname($blockName)[0];
+                    echo $temp->path;
+                    var_dump($_SERVER);
+
+                      header("Location: $temp->path");
+                      die;
+
+            }
 
 
 
@@ -96,9 +97,11 @@ case 2 :
         $blok->delete();
 
 
+
     }
 
     function addBlock($level) {
+
 
         $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
 
