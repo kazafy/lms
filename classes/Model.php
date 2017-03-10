@@ -36,7 +36,7 @@ class Model{
 
         $dbhost="localhost";
         $dbname="Project";
-        $uname="kazafy";
+        $uname="root";
         $password="";
 
         $me=new Reflectionclass($this);
@@ -157,16 +157,20 @@ class Model{
         $tname= $allprop["tablename"];
         $pk= $allprop["id"];
         $query="SELECT * from $tname where $pk = ?";
+        echo $query;
         $prep = self::$db->prepare($query);
         $prep->execute([$id]);
         $all=$prep->fetchAll(PDO::FETCH_ASSOC);
+       
+         $me=new static;
+          if(count($all)>0){
         $row=$all[0];
-        $me=new static;
+       
         foreach ($me->properties as $key=>$value)
         {
             $me->properties[$key]=$row[$key];
         }
-
+}
         return $me;
 
     }
