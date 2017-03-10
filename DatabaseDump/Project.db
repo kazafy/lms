@@ -1,8 +1,8 @@
--- MySQL dump 10.14  Distrib 5.5.52-MariaDB, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
 --
 -- Host: localhost    Database: Project
 -- ------------------------------------------------------
--- Server version	5.5.52-MariaDB
+-- Server version	5.7.17-0ubuntu0.16.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,14 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `Project`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `Project` /*!40100 DEFAULT CHARACTER SET latin1 */;
-
-USE `Project`;
 
 --
 -- Table structure for table `Category`
@@ -37,7 +29,7 @@ CREATE TABLE `Category` (
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `creatorid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +38,7 @@ CREATE TABLE `Category` (
 
 LOCK TABLES `Category` WRITE;
 /*!40000 ALTER TABLE `Category` DISABLE KEYS */;
+INSERT INTO `Category` VALUES (1,'aj','sfdfsdfds','2017-03-08 17:47:08',31),(3,'tech','descdfdfd','2017-03-09 19:29:30',31),(4,'soft','descdfdfd','2017-03-09 19:30:28',31),(5,'new','descdfdfd','2017-03-09 19:30:48',31);
 /*!40000 ALTER TABLE `Category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +83,7 @@ CREATE TABLE `Course` (
   `creatorid` int(11) NOT NULL,
   `categoryid` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,6 +92,7 @@ CREATE TABLE `Course` (
 
 LOCK TABLES `Course` WRITE;
 /*!40000 ALTER TABLE `Course` DISABLE KEYS */;
+INSERT INTO `Course` VALUES (1,'java','descdfdfd','2017-03-09 19:33:25',31,3),(2,'php','descdfdfd','2017-03-09 19:33:57',31,3),(3,'nodejs','descdfdfd','2017-03-09 19:34:13',31,3);
 /*!40000 ALTER TABLE `Course` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,16 +183,18 @@ DROP TABLE IF EXISTS `User`;
 CREATE TABLE `User` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
-  `email` varchar(40) NOT NULL,
-  `signature` varchar(60) DEFAULT NULL,
-  `picture` varchar(60) DEFAULT NULL,
-  `password` varchar(40) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `signature` varchar(100) DEFAULT NULL,
+  `picture` varchar(100) DEFAULT NULL,
+  `password` varchar(65) NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `state` tinyint(1) NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '1',
   `banstart` datetime DEFAULT NULL,
   `banend` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+  `type` int(11) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +203,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (30,'ahmeddd','eedd',NULL,NULL,'12','2017-03-03 10:23:39',1,NULL,NULL),(31,'ahmeddd','eedd',NULL,NULL,'12','2017-03-03 10:23:43',1,NULL,NULL),(32,'ahmeddd','eedd',NULL,NULL,'12','2017-03-03 10:23:51',1,NULL,NULL),(33,'ahmeddd','eedd',NULL,NULL,'12','2017-03-03 10:31:46',1,NULL,NULL),(34,'ahmeddd','eedd',NULL,NULL,'12','2017-03-03 10:31:49',1,NULL,NULL),(35,'ahmeddd','eedd',NULL,NULL,'12','2017-03-03 10:31:52',1,NULL,NULL);
+INSERT INTO `User` VALUES (30,'ahmedddd','eedd',NULL,NULL,'12','2017-03-09 14:20:16',1,NULL,NULL,0),(39,'kl','k@f.m',NULL,NULL,'123','2017-03-09 15:12:43',1,NULL,NULL,0),(40,'kkkkkkk','k@k.kll.l',NULL,NULL,'123','2017-03-09 14:24:52',1,NULL,NULL,0),(41,'lkkl','l@l.l',NULL,NULL,'123','2017-03-09 14:43:08',1,NULL,NULL,1),(42,'a','a@a.a',NULL,NULL,'123','2017-03-08 20:18:10',1,NULL,NULL,1),(43,'m','m@m.m',NULL,NULL,'$2y$10$R2RVQoiFslRTQFtU7Z9W6OzVzcpN7smBA0iHm9biAh21kAxz8Wrki','2017-03-09 17:07:59',1,NULL,NULL,0),(46,'p','p@p.p',NULL,NULL,'$2y$10$QOa0nE3EUszRagi5VZU/Pe8pHvRxM7KS0iJ1MhiX8sq.S07KaJVFW','2017-03-08 20:34:06',1,NULL,NULL,1),(48,'nm','n@n.n',NULL,NULL,'$2y$10$UvWn5aStE4Lo9s3ZPxHyV.7riM4ZcsstZVY/7lws7TtXDpmxGeiqu','2017-03-09 14:18:18',1,NULL,NULL,0),(49,'mn','m@l.c',NULL,NULL,'$2y$10$dGD7eJ/xWN1c8s4nH0bfC.DMNc34b/jJttxJcOYqUJVU9hNiEmcMq','2017-03-09 14:05:31',1,NULL,NULL,1),(50,'admin','admin@admin.com',NULL,NULL,'$2y$10$jiRNB5VC8ypasZPRsL8KNeDIjRMagI17aYi69f9x096pHl18xj.NO','2017-03-08 21:00:53',1,NULL,NULL,1),(53,'m','m@m',NULL,NULL,'$2y$10$Juuf/ZFhsIc7HY/h13T1u.Cm4h4xk5NtH8H5SgHoTh3x7BKVMlLkm','2017-03-09 17:07:59',1,NULL,NULL,0);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -220,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-06  2:46:03
+-- Dump completed on 2017-03-10 14:30:24
