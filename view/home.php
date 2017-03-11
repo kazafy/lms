@@ -44,7 +44,7 @@ include "nav.php";
                                 
                                  <?php 
         
-                                  if(! empty($user) && $level == 1)
+                                  if(1)
                                 {
                                     ?>
                                 <a class="left com" href="<?=$block->id?>"><i class="material-icons">textsms</i></a>
@@ -266,7 +266,7 @@ include "nav.php";
 
 
 <div id="modal2" class="modal">
-    <object class="viewobj" data="/lms/10.pdf"></object>
+    <iframe scrolling=0 class="viewobj" src="/lms/10.pdf"></iframe>
     </div>
 
 
@@ -406,7 +406,7 @@ function refreshcomments(url){
 e.preventDefault();
 //$(this).
 console.log($(this).attr("href"));
- $('.viewobj').attr("data",$(this).attr("href"));
+ $('.viewobj').attr("src",$(this).attr("href"));
 
  $('.viewobj').width( ($("#modal2").width()));
 $('#modal2').modal('open');

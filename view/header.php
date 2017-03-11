@@ -25,10 +25,10 @@
             color: crimson !important;
         }
 
-        object:focus {
+        iframe:focus {
     outline: none;
 }
-object {
+iframe {
 
 height:500;
 

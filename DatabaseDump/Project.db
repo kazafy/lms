@@ -35,6 +35,16 @@ CREATE TABLE `Category` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Category`
+--
+
+LOCK TABLES `Category` WRITE;
+/*!40000 ALTER TABLE `Category` DISABLE KEYS */;
+INSERT INTO `Category` VALUES (1,'aj','sfdfsdfds','2017-03-08 17:47:08',31),(3,'tech','descdfdfd','2017-03-09 19:29:30',31),(4,'soft','descdfdfd','2017-03-09 19:30:28',31),(5,'new','descdfdfd','2017-03-09 19:30:48',31);
+/*!40000 ALTER TABLE `Category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Comment`
 --
 
@@ -52,8 +62,18 @@ CREATE TABLE `Comment` (
   KEY `materialcommentid` (`materialid`),
   CONSTRAINT `materialcommentid` FOREIGN KEY (`materialid`) REFERENCES `Material` (`id`),
   CONSTRAINT `comcreatoid` FOREIGN KEY (`creatorid`) REFERENCES `User` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Comment`
+--
+
+LOCK TABLES `Comment` WRITE;
+/*!40000 ALTER TABLE `Comment` DISABLE KEYS */;
+INSERT INTO `Comment` VALUES (1,'heeeeeeeeeeey','2017-03-10 19:27:12',31,3),(2,'MAAAAAAAAAY','2017-03-10 19:27:19',31,3),(7,'kkkkkkkkkkkksdfssdf','2017-03-11 08:04:33',53,3),(8,'kkkkkkkkkkkksdfssdf','2017-03-11 08:05:27',53,3),(12,'dsd','2017-03-11 08:09:03',53,3),(13,'sdsd','2017-03-11 08:10:36',53,3),(14,'fsdsdfsdf','2017-03-11 08:11:11',53,3),(15,'sfsdf','2017-03-11 08:12:55',53,3),(16,'dss','2017-03-11 08:13:17',53,3),(17,'sdsd','2017-03-11 08:14:02',53,3),(18,'kek','2017-03-11 08:15:07',53,3),(23,'lololololol','2017-03-11 08:35:49',53,5),(29,'thankls','2017-03-11 12:14:40',53,5),(30,'jkhk\nk..........................','2017-03-11 12:22:59',53,5);
+/*!40000 ALTER TABLE `Comment` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `Course`
@@ -78,6 +98,16 @@ CREATE TABLE `Course` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Course`
+--
+
+LOCK TABLES `Course` WRITE;
+/*!40000 ALTER TABLE `Course` DISABLE KEYS */;
+INSERT INTO `Course` VALUES (1,'java','descdfdfd','2017-03-09 19:33:25',31,3),(2,'php','descdfdfd','2017-03-09 19:33:57',31,3),(3,'nodejs','descdfdfd','2017-03-09 19:34:13',31,3);
+/*!40000 ALTER TABLE `Course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Course_Type`
 --
 
@@ -94,6 +124,16 @@ CREATE TABLE `Course_Type` (
   CONSTRAINT `ctcoidf` FOREIGN KEY (`courseid`) REFERENCES `Course` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Course_Type`
+--
+
+LOCK TABLES `Course_Type` WRITE;
+/*!40000 ALTER TABLE `Course_Type` DISABLE KEYS */;
+INSERT INTO `Course_Type` VALUES (1,2,'2017-03-10 20:38:16'),(1,3,'2017-03-10 20:38:16');
+/*!40000 ALTER TABLE `Course_Type` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `Material`
@@ -125,6 +165,16 @@ CREATE TABLE `Material` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `Material`
+--
+
+LOCK TABLES `Material` WRITE;
+/*!40000 ALTER TABLE `Material` DISABLE KEYS */;
+INSERT INTO `Material` VALUES (3,'book','lololol','2017-03-10 19:14:24','/lms/k.jpg',31,1,3,1,1,0),(5,'lol','lololol','2017-03-10 19:14:50','/lms/10.pdf',31,2,2,1,1,0);
+/*!40000 ALTER TABLE `Material` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Type`
 --
 
@@ -138,6 +188,16 @@ CREATE TABLE `Type` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Type`
+--
+
+LOCK TABLES `Type` WRITE;
+/*!40000 ALTER TABLE `Type` DISABLE KEYS */;
+INSERT INTO `Type` VALUES (1,'image','.jpg'),(2,'PDF','.pdf'),(3,'JPG','.jpg');
+/*!40000 ALTER TABLE `Type` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `User`
@@ -162,6 +222,16 @@ CREATE TABLE `User` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` VALUES (31,'ahmedddd','eedd',NULL,NULL,'12','2017-03-10 17:50:59',1,NULL,NULL,0),(39,'kl','k@f.m',NULL,NULL,'123','2017-03-09 15:12:43',1,NULL,NULL,0),(40,'kkkkkkk','k@k.kll.l',NULL,NULL,'123','2017-03-09 14:24:52',1,NULL,NULL,0),(41,'lkkl','l@l.l',NULL,NULL,'123','2017-03-09 14:43:08',1,NULL,NULL,1),(42,'a','a@a.a',NULL,NULL,'123','2017-03-08 20:18:10',1,NULL,NULL,1),(43,'m','m@m.m',NULL,NULL,'$2y$10$R2RVQoiFslRTQFtU7Z9W6OzVzcpN7smBA0iHm9biAh21kAxz8Wrki','2017-03-09 17:07:59',1,NULL,NULL,0),(46,'p','p@p.p',NULL,NULL,'$2y$10$QOa0nE3EUszRagi5VZU/Pe8pHvRxM7KS0iJ1MhiX8sq.S07KaJVFW','2017-03-08 20:34:06',1,NULL,NULL,1),(48,'nm','n@n.n',NULL,NULL,'$2y$10$UvWn5aStE4Lo9s3ZPxHyV.7riM4ZcsstZVY/7lws7TtXDpmxGeiqu','2017-03-09 14:18:18',1,NULL,NULL,0),(49,'mn','m@l.c',NULL,NULL,'$2y$10$dGD7eJ/xWN1c8s4nH0bfC.DMNc34b/jJttxJcOYqUJVU9hNiEmcMq','2017-03-09 14:05:31',1,NULL,NULL,1),(50,'admin','admin@admin.com',NULL,NULL,'$2y$10$jiRNB5VC8ypasZPRsL8KNeDIjRMagI17aYi69f9x096pHl18xj.NO','2017-03-08 21:00:53',1,NULL,NULL,1),(53,'m','m@m',NULL,NULL,'$2y$10$Juuf/ZFhsIc7HY/h13T1u.Cm4h4xk5NtH8H5SgHoTh3x7BKVMlLkm','2017-03-09 17:07:59',1,NULL,NULL,0);
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -172,4 +242,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-11 12:41:02
+-- Dump completed on 2017-03-11 15:47:38
