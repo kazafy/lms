@@ -54,7 +54,33 @@ route('/lms/api/add/(.*)', function($matches){
     $mainController->addBlock($matches[1][0]);
     exit;
 });
-
+route('/lms/api/comments/get/(.*)', function($matches){
+    header("Access-Control-Allow-Origin:*");
+    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
+   // die();
+    //checkLogin();
+    $mainController =new \controller\MainController();
+    $mainController->sendcomments($matches[1][0]);
+    exit;
+});
+route('/lms/api/comments/submit/(.*)', function($matches){
+    header("Access-Control-Allow-Origin:*");
+    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
+   // die();
+    //checkLogin();
+    $mainController =new \controller\MainController();
+    $mainController->submitcomments($matches[1][0]);
+    exit;
+});
+route('/lms/api/comments/delete/(.*)', function($matches){
+    header("Access-Control-Allow-Origin:*");
+    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
+   // die();
+    //checkLogin();
+    $mainController =new \controller\MainController();
+    $mainController->deletecomment($matches[1][0]);
+    exit;
+});
 route('/lms/', function($matches){
 
 

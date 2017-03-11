@@ -19,7 +19,7 @@ require_once 'classes/Type.php';
 require_once 'classes/Course.php';
 require_once 'classes/Material.php';
 require_once 'classes/User.php';
-
+require_once 'classes/Comment.php';
 //require_once 'model/User.php';
 require_once 'database/PostController.php';
 
@@ -116,7 +116,53 @@ class MainController
 
 
     }
+    function sendcomments($id) {
+        
+        $commentlist=\Comment::fetchmaterialid($id);
+        $commentarray=array();
 
+        foreach($commentlist as $mycomment)
+        {
+            $currcomment=[];
+            $currcomment["id"]=$mycomment->id;
+             $currcomment["creatorid"]=$mycomment->creatorid;
+             $currcomment["body"]=$mycomment->body;
+              $currcomment["creatorname"]=\User::fetchid($mycomment->creatorid)[0]->name;
+            $commentarray[]=$currcomment;
+        }
+
+        echo json_encode($commentarray);
+       exit();
+
+
+    }
+           function deletecomment($id) {
+        session_start();
+        $comment=new \Comment();
+        $comment->id=$id;
+       
+
+
+        
+        echo json_encode( $comment->delete());
+       exit();
+
+
+    }
+        function submitcomments($id) {
+        session_start();
+        $comment=new \Comment();
+        $comment->body=$_POST["body"];
+        $comment->creatorid=$_SESSION['user']->id;
+         $comment->materialid=$id;
+
+
+        
+        echo json_encode($comment->insert());
+       exit();
+
+
+    }
     function addBlock($level) {
 
 

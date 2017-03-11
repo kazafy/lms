@@ -52,7 +52,7 @@ CREATE TABLE `Comment` (
   KEY `materialcommentid` (`materialid`),
   CONSTRAINT `materialcommentid` FOREIGN KEY (`materialid`) REFERENCES `Material` (`id`),
   CONSTRAINT `comcreatoid` FOREIGN KEY (`creatorid`) REFERENCES `User` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,14 +111,17 @@ CREATE TABLE `Material` (
   `creatorid` int(11) unsigned NOT NULL,
   `courseid` int(11) unsigned NOT NULL,
   `typeid` int(11) unsigned NOT NULL,
+  `downloadable` tinyint(1) NOT NULL DEFAULT '1',
+  `viewable` tinyint(1) NOT NULL DEFAULT '1',
+  `downloadtimes` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `matcoidf` (`courseid`),
   KEY `mattyidf` (`typeid`),
   KEY `matusidf` (`creatorid`),
-  CONSTRAINT `matusidf` FOREIGN KEY (`creatorid`) REFERENCES `User` (`id`),
   CONSTRAINT `matcoidf` FOREIGN KEY (`courseid`) REFERENCES `Course` (`id`),
-  CONSTRAINT `mattyidf` FOREIGN KEY (`typeid`) REFERENCES `Type` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  CONSTRAINT `mattyidf` FOREIGN KEY (`typeid`) REFERENCES `Type` (`id`),
+  CONSTRAINT `matusidf` FOREIGN KEY (`creatorid`) REFERENCES `User` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +136,7 @@ CREATE TABLE `Type` (
   `name` varchar(30) NOT NULL,
   `extension` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,4 +172,4 @@ CREATE TABLE `User` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-10 20:06:07
+-- Dump completed on 2017-03-11 12:41:02
