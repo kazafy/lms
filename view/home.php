@@ -41,8 +41,20 @@ include "nav.php";
                                         <p class="truncate teal-text"> <?php echo $block->name;?></p>
                             </div>
                             <div class="card-action">
-                                <a class="left com" href="<?=$block->id?>">5 c</a>
-
+                                
+                                 <?php 
+        
+                                  if(! empty($user) && $level == 1)
+                                {
+                                    ?>
+                                <a class="left com" href="<?=$block->id?>"><i class="material-icons">textsms</i></a>
+                                 <a class="  viewme btn-block waves-effect waves-light "
+                                       href="/lms/admin/post/update/<?php echo $block->id;?>"><i class="material-icons">play_for_work</i></a>
+                                        <a class="  viewme btn-block waves-effect waves-light "
+                                       href="<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>"><i class="material-icons">pageview</i></a>
+                                <?php 
+                                 }
+                                    ?>
                                 <?php  if(! empty($user) && $user->type == 0)
                                 {
                                     ?>
@@ -185,19 +197,11 @@ include "nav.php";
   <div class="modal-content">
     <h4>Comments</h4>
     <div id="modal_content" class="row">
+        
         <div id="commentspart" >
-        <div class="row">
-
-
-
-        <h2>sdklfjsdlkfjsssssssfsdfdsfkjgfkhekagfuisdjkfsdkjhfkjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</h2>
-    </div>
-        <div class="row">
-        <h2>sdklfjsdlkfjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</h2>
-    </div>
-        <div class="row">
-        sdklfjsdlkfjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-    </div>
+  
+ 
+  
       </div>
 
 
@@ -261,7 +265,9 @@ include "nav.php";
 
 
 
-
+<div id="modal2" class="modal">
+    <object class="viewobj" data="/lms/10.pdf"></object>
+    </div>
 
 
 
@@ -279,6 +285,8 @@ include "footer.php";
 var currmodal;
  $(document).ready(function(){
   $('#modal').modal();
+ 
+    $('#modal2').modal();
   });
 
 $("#subcomment").submit(
@@ -313,24 +321,6 @@ e.preventDefault();
      
  }
  );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -408,6 +398,26 @@ function refreshcomments(url){
 
 
 }
+
+
+ $(".viewme").click(
+   function(e){
+
+e.preventDefault();
+//$(this).
+console.log($(this).attr("href"));
+ $('.viewobj').attr("data",$(this).attr("href"));
+
+ $('.viewobj').width( ($("#modal2").width()));
+$('#modal2').modal('open');
+
+
+
+
+
+     
+ });
+
 
  $(".com").click(
    function(e){

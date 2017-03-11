@@ -25,7 +25,16 @@
             color: crimson !important;
         }
 
+        object:focus {
+    outline: none;
+}
+object {
 
+height:500;
+
+
+
+}
     </style>
 
 </head>
