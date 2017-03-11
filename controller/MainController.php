@@ -20,6 +20,8 @@ require_once 'classes/Course.php';
 require_once 'classes/Material.php';
 require_once 'classes/User.php';
 require_once 'classes/Comment.php';
+require_once 'classes/Request.php';
+
 //require_once 'model/User.php';
 require_once 'database/PostController.php';
 
@@ -44,7 +46,7 @@ class MainController
 
     }
 
-    function showBlocks($blockName , $level){
+    function showBlocks($blockName , $level,$wmtchs){
 
         session_start();
         $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
@@ -59,8 +61,13 @@ class MainController
         $catogeries =\Category::Fetchall();
         $types = \Type::Fetchall();
         $courses = \Course::Fetchall();
+    
 
         $blocls=['Category','Course','Material'];
+        $baselink='/lms/';
+
+
+
 
         switch($level){
             case -1 :
@@ -105,8 +112,40 @@ class MainController
 
 
     }
+    
+ function downloadmaterial($id){
+        $ref = \Material::fetchid($id)[0];
+        
+        var_dump("http://".$_SERVER["SERVER_NAME"].$ref->path);
+       
+    $file_url = "http://".$_SERVER["SERVER_NAME"].$ref->path;
+    header('Content-Type: application/octet-stream');
+    header("Content-Transfer-Encoding: Binary"); 
+    header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\""); 
+    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+    readfile($file_url);
+    $ref->downloadtimes++;
+    $ref->update();
+       exit();
 
 
+
+
+    }
+  /*
+     function downloadmaterial($id){
+        $ref = \Material::fetchid($id)[0];
+header('Content-Type: application/octet-stream');
+header("Content-Transfer-Encoding: Binary"); 
+header("Content-disposition: attachment; filename=\"" . basename($file_url) . "\""); 
+readfile($file_url);
+       exit();
+
+
+
+
+    }
+*/
     function deleteBlock($table,$id){
         $ref = new \ReflectionClass($table);
         $blok= $ref->newInstance();
@@ -159,6 +198,21 @@ class MainController
 
         
         echo json_encode($comment->insert());
+       exit();
+
+
+    }
+            function submitrequests($id) {
+        session_start();
+        $request=new \Request();
+        $request->title=$_POST["title"];
+         $request->type=$_POST["type"];
+          $request->body=$_POST["body"];
+        $request->creatorid=$_SESSION['user']->id;
+
+
+        
+        echo json_encode($request->insert());
        exit();
 
 

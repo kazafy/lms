@@ -74,6 +74,25 @@ route('/lms/api/comments/submit/(.*)', function($matches){
     $mainController->submitcomments($matches[1][0]);
     exit;
 });
+route('/lms/api/requests/submit/(.*)', function($matches){
+    header("Access-Control-Allow-Origin:*");
+    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
+   // die();
+    //checkLogin();
+    $mainController =new \controller\MainController();
+    $mainController->submitrequests($matches[1][0]);
+    exit;
+});
+route('/lms/material/download/(.*)', function($matches){
+    header("Access-Control-Allow-Origin:*");
+    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
+   // die();
+    //checkLogin();
+    $mainController =new \controller\MainController();
+    $mainController->downloadmaterial($matches[1][0]);
+    exit;
+});
+
 route('/lms/api/comments/delete/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
@@ -171,6 +190,7 @@ route('/lms/admin/post/(.*)', function($matches){
 route("/lms/views/([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}", function($matches){
     $var =null;
     $i=count($matches)-1;
+    $wmchs=[];
     for(; $i>0 ; $i--){
 
         if(!empty($matches[$i][0]))
@@ -179,10 +199,16 @@ route("/lms/views/([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}", function
             break;
         }
     }
-   
+$wmchs[]='views';
+       for($j=1; ($j<count($matches))&&(!empty($matches[$j][0])) ; $j++)
+          {   $wmchs[] = $matches[$j][0];
+             
+
+          }
+    
     $mainController = new \controller\MainController();
 
-    $mainController->showBlocks($var ,--$i);
+    $mainController->showBlocks($var ,--$i, $wmchs);
     exit;
 });
 
