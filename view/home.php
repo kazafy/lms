@@ -327,10 +327,13 @@ include "nav.php";
 <?php
 
 include "footer.php";
+session_start();
+
 ?>
 <script>
 var currmodal;
-
+var userid = <?= $_SESSION["user"]->id; ?>;
+var usertype = <?= $_SESSION["user"]->type; ?>
 
 
 
@@ -483,14 +486,17 @@ function refreshcomments(url){
                                 var elem=$("<div>");
                                 elem.addClass("row");
                                elem.append("<p>"+mydata[i].creatorname+":"+mydata[i].body);
+                               console.log(mydata[i].creatorid,userid);
+                               
+                               if(mydata[i].creatorid==userid ){
                                var link=$("<a>");
                                link.addClass('right');
                                 link.addClass('waves-effect waves-light');
                                 link.attr("href",'/lms/api/comments/delete/'+mydata[i].id);
                                 var myi=$("<i>");
                                 link.click(function kek(e){
-                                    e.preventDefault();
-                                 
+                                   
+                                                e.preventDefault();
                                                 $.ajax({
                                                         type: "POST",
                                                         url: $(this).attr('href'),
@@ -508,8 +514,8 @@ function refreshcomments(url){
                                  myi.text("delete");
                                  link.append(myi);
                                  elem.append(link);
-
-                              
+                               }
+                               
                                 $("#commentspart").append(elem);
 
 
