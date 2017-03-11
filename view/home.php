@@ -17,9 +17,9 @@ include "nav.php";
         <div class="row ">
             <div class="col offset-l1 l10">
                 <br>
-                <a class="btn-flat" >Tech</a> >
-                <a class="btn-flat"  >programming</a> >
-                <a class="btn-flat" >java</a>
+                <?php foreach($wmtchs as $els){ ?>
+                <a class="btn-flat" href=<?=$baselink.=$els."/" ?> ><?= $els?></a> >
+                <?php } ?>
             </div>
         </div>
         <hr/>
@@ -37,7 +37,7 @@ include "nav.php";
                     <div class="card horizontal hoverable">
 
                         <div class="card-stacked">
-                            <div class="card-content" onclick="window.location.href='<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>/'">
+                            <div class="card-content" <?php if ($level!=1){ ?>onclick="window.location.href='<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>/' <?php } ?>">
                                         <p class="truncate teal-text"> <?php echo $block->name;?></p>
                             </div>
                             <div class="card-action">
@@ -48,8 +48,8 @@ include "nav.php";
                                 {
                                     ?>
                                 <a class="left com" href="<?=$block->id?>"><i class="material-icons">textsms</i></a>
-                                 <a class="  viewme btn-block waves-effect waves-light "
-                                       href="/lms/admin/post/update/<?php echo $block->id;?>"><i class="material-icons">play_for_work</i></a>
+                                 <a class="  btn-block waves-effect waves-light "
+                                       href="/lms/material/download/<?php echo $block->id;?>/"><i class="material-icons">play_for_work</i></a>
                                         <a class="  viewme btn-block waves-effect waves-light "
                                        href="<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>"><i class="material-icons">pageview</i></a>
                                 <?php 
@@ -270,8 +270,55 @@ include "nav.php";
     </div>
 
 
+<div id="modal3" class="modal">
+ 
+    <div id="modal_content" >
+     <div class="row">    
+<form id="myrequest" >
+
+ <div class="row">
+     <div class="input-field col s6">
+          <input  id="reqtitle" type="text" class="validate">
+          <label for="reqtitle">Title</label>
+        </div>
+        
+  </div>
+ <div class="input-field col s12">
+    <select id="selected">
+      <option value="" disabled selected>Type</option>
+      <option value="0">Course</option>
+      <option value="1">Material</option>
+    </select>
+    <label>Materialize Select</label>
+  </div>
+      <div class="row">
+        <div class="input-field col s12">
+         <textarea id="Request" class="materialize-textarea" data-length="120"></textarea>
+            <label for="textarea1">Request</label>
+        </div>
 
 
+
+
+      </div>
+    
+
+<div class="row">
+<button class="right btn waves-effect waves-light" type="submit">Submit
+    <i class="material-icons right">send</i>
+  </button>
+</div>
+
+
+
+  
+    </form>
+    </div>
+     </div>
+  </div>
+        
+
+        
 
 
 
@@ -283,15 +330,101 @@ include "footer.php";
 ?>
 <script>
 var currmodal;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  $(document).ready(function(){
   $('#modal').modal();
  
     $('#modal2').modal();
+     $('#modal3').modal();
+      $('select').material_select();
   });
+
+
+
+
+
+
+ $(".req").click(
+   function(e){
+
+e.preventDefault();
+//$(this).
+
+$('#modal3').modal('open');
+
+
+
+
+
+     
+ });
+
+
+
+$("#myrequest").submit(
+   function(e){
+     
+     
+console.log (this);
+console.log($('#selected'));
+console.log({body:$('#Request').val(),title:$('#reqtitle').val(),type:$('#selected').val()});
+  e.preventDefault();
+ 
+  var url = "/lms/api/requests/submit/";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {body:$('#Request').val(),title:$('#reqtitle').val(),type:$('#selected').val()}, 
+            success: function(mydata)
+            {
+                console.log(mydata);
+             
+
+            
+            }
+        });
+   alert("submitted");
+      $(this)[0].reset();
+
+       
+e.preventDefault();
+//$(this).
+$('#modal3').modal('close');
+
+     
+ }
+ );
+
+
+
+
+
+
+
+
+
+
 
 $("#subcomment").submit(
    function(e){
-       alert("submit");
+     
      
 console.log (this);
 
@@ -385,7 +518,7 @@ function refreshcomments(url){
 
 
 
-                alert("RECE"); // show response from the php script.
+              
                 console.log(mydata);
             }
         });
@@ -418,6 +551,27 @@ $('#modal2').modal('open');
      
  });
 
+
+
+
+
+ $(".down").click(
+   function(e){
+
+e.preventDefault();
+//$(this).
+console.log($(this).attr("href"));
+ $('.viewobj').attr("src",$(this).attr("href"));
+
+ $('.viewobj').width( ($("#modal2").width()));
+$('#modal2').modal('open');
+
+
+
+
+
+     
+ });
 
  $(".com").click(
    function(e){
@@ -462,7 +616,7 @@ $('#modal').modal('open');
             data: $("#idForm").serialize(), // serializes the form's elements.
             success: function(data)
             {
-                alert(data); // show response from the php script.
+             //   alert(data); // show response from the php script.
             }
         });
         e.preventDefault(); // avoid to execute the actual submit of the form.
