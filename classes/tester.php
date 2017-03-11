@@ -7,8 +7,8 @@ require_once('Course_Type.php');
 Course::fetchCategoryid();
 var_dump(Course::fetchcategoryid());
 */
-var_dump(Course::fetchid(1)[0]);
-Course::fetchid(1)[0]->insert_courses([2,3]);
+
+var_dump(Course::fetchid(1)[0]->get_types());
 /*
 $to      = 'mohamad.gamal.abdelhay@gmail.com';
 $subject = 'Test134';

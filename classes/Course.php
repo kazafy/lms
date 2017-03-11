@@ -6,6 +6,7 @@
 require_once("Model.php");
 
 require_once("Course_Type.php");
+require_once("Type.php");
 class Course extends Model{
 
 public $tablename="Course";
@@ -22,6 +23,17 @@ $ctype->insert();
 }
 
 
+
+}
+public function get_types(){
+$ctypelist=Course_Type::fetchcourseid(parent::__get('id'));
+$ids=[];
+foreach ($ctypelist as $cid){
+$ids[]=$cid->typeid;
+
+
+}
+return $ids;
 
 }
 

@@ -130,6 +130,33 @@ class MainController
 
 
     }
+           function deletecomment($id) {
+        session_start();
+        $comment=new \Comment();
+        $comment->id=$id;
+       
+
+
+        
+        echo json_encode( $comment->delete());
+       exit();
+
+
+    }
+        function submitcomments($id) {
+        session_start();
+        $comment=new \Comment();
+        $comment->body=$_POST["body"];
+        $comment->creatorid=$_SESSION['user']->id;
+         $comment->materialid=$id;
+
+
+        
+        echo json_encode($comment->insert());
+       exit();
+
+
+    }
     function addBlock($level) {
 
 

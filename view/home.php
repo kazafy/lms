@@ -185,7 +185,11 @@ include "nav.php";
   <div class="modal-content">
     <h4>Comments</h4>
     <div id="modal_content" class="row">
+        <div id="commentspart" >
         <div class="row">
+
+
+
         <h2>sdklfjsdlkfjsssssssfsdfdsfkjgfkhekagfuisdjkfsdkjhfkjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</h2>
     </div>
         <div class="row">
@@ -194,7 +198,58 @@ include "nav.php";
         <div class="row">
         sdklfjsdlkfjsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
     </div>
-      
+      </div>
+
+
+
+
+
+<form id="subcomment" class="row">
+
+
+     
+      <div class="row">
+        <div class="input-field col s12">
+         <textarea id="Comment" class="materialize-textarea" data-length="120"></textarea>
+            <label for="textarea1">Comment</label>
+        </div>
+      </div>
+  
+
+
+
+
+<button class="btn waves-effect waves-light" type="submit">Submit
+    <i class="material-icons right">send</i>
+  </button>
+
+
+
+
+  
+    </form>
+  </div>
+        
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
     </div>
     <div class="modal-footer">
       <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
@@ -221,29 +276,118 @@ include "nav.php";
 include "footer.php";
 ?>
 <script>
+var currmodal;
  $(document).ready(function(){
   $('#modal').modal();
   });
 
-
- $(".com").click(
+$("#subcomment").submit(
    function(e){
-console.log($(this).attr('href'));
-  var url = "/lms/api/comments/get/"+$(this).attr('href');
+       alert("submit");
+     
+console.log (this);
+
+  e.preventDefault();
+  var url = "/lms/api/comments/submit/"+currmodal;
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {body:$('#Comment').val()}, 
+            success: function(mydata)
+            {
+                console.log("Done");
+             
+
+            
+            }
+        });
+  console.log($(this));
+      $(this)[0].reset();
+ url = "/lms/api/comments/get/"+currmodal;
+refreshcomments(url);
+       
+e.preventDefault();
+//$(this).
+
+
+     
+ }
+ );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+function refreshcomments(url){
+
+
       $.ajax({
             type: "POST",
             url: url,
             success: function(mydata)
             {
                 mydata=JSON.parse(mydata);
-                console.log(mydata.length);
- console.log(mydata[0]);
+            
 
-                $("#modal_content").empty();
+                $("#commentspart").empty();
                         for(i=0;i<mydata.length;i++){
                                 var elem=$("<div>");
+                                elem.addClass("row");
                                elem.append("<p>"+mydata[i].creatorname+":"+mydata[i].body);
-                                $("#modal_content").append(elem);
+                               var link=$("<a>");
+                               link.addClass('right');
+                                link.addClass('waves-effect waves-light');
+                                link.attr("href",'/lms/api/comments/delete/'+mydata[i].id);
+                                var myi=$("<i>");
+                                link.click(function kek(e){
+                                    e.preventDefault();
+                                 
+                                                $.ajax({
+                                                        type: "POST",
+                                                        url: $(this).attr('href'),
+                                                        success: function(e)
+                                                        {
+                                                           console.log(this.url);
+                                                           refreshcomments(url)
+                                                        }
+                                                }
+                                                );
+                                                                                
+
+                                });
+                                 myi.addClass('material-icons');
+                                 myi.text("delete");
+                                 link.append(myi);
+                                 elem.append(link);
+
+                              
+                                $("#commentspart").append(elem);
 
 
                         }
@@ -255,6 +399,21 @@ console.log($(this).attr('href'));
                 console.log(mydata);
             }
         });
+
+
+
+
+
+
+
+
+}
+
+ $(".com").click(
+   function(e){
+currmodal=$(this).attr('href');
+  var url = "/lms/api/comments/get/"+currmodal;
+refreshcomments(url);
 e.preventDefault();
 //$(this).
 
