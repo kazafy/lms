@@ -159,8 +159,9 @@ route("/lms/views/([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}", function
 });
 
 route('/lms/views/', function($matches){
+
     $mainController = new \controller\MainController();
-    $mainController->mainHandler();
+    $mainController->showBlocks("",-1);
     exit;
 });
 
@@ -172,7 +173,7 @@ route('/lms/admin/(.*)', function($matches){
 
 route('/lms/home/(.*)', function($matches){
     $mainController = new \controller\MainController();
-    $mainController->mainHandler();
+    $mainController->showBlocks("",-1);
     exit;
 });
 

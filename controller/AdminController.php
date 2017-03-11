@@ -19,6 +19,8 @@ class AdminController
 {
 
     function showUsers(){
+        $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
+
         $userController =new UserController();
 //        $users = $userController->userList();
         $users  = \User::Fetchall();

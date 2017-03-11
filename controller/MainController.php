@@ -46,7 +46,12 @@ class MainController
 
     function showBlocks($blockName , $level){
 
+        session_start();
         $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
+        if($user == null){
+            session_destroy();
+        }
+
         $cat = new \Category();
         $ty =new \Type();
         $cour = new \Course();
@@ -80,6 +85,7 @@ class MainController
                 $funprep="fetch".$className."id";
 
                 $blocks = $childclassName::$funprep($temp->id);
+                $parentId=$temp->id;
                 include "view/home.php";
                 die;
 
@@ -121,10 +127,10 @@ class MainController
                 echo json_encode($this->addCategory($user->id));
                 break;
             case 0:
-                echo json_encode($this->addCourse());
+                echo json_encode($this->addCourse($user->id));
                 break;
             case 1:
-                echo json_encode($this->addMaterial());
+                echo json_encode($this->addMaterial($user->id));
                 break;
             default:
                 $error = "page not found";
@@ -145,20 +151,56 @@ class MainController
         return $result;
 
     }
-    private function  addCourse(){
+    private function  addCourse($creatorid){
         $course = new \Course();
         $course->name = $_REQUEST['name'];
         $course->description = $_REQUEST['desc'];
+        $course->creatorid = $creatorid;
 
 
-        
+
+
     }
-    private function  addMaterial(){
+    private function  addMaterial($creatorid){
         $material = new \Material();
         $material->name = $_REQUEST['name'];
         $material->description = $_REQUEST['desc'];
+        $material->creatorid = $creatorid;
+
+        if(isset($_FILES['file'])){
+            $errors= array();
+            $file_name = $_FILES['file']['name'];
+            $file_size =$_FILES['file']['size'];
+            $file_tmp =$_FILES['file']['tmp_name'];
+            $file_type=$_FILES['file']['type'];
+            $file_ext=strtolower(end(explode('.',$_FILES['file']['name'])));
+
+            $expensions= array("jpeg","jpg","png");
+
+            if(in_array($file_ext,$expensions)=== false){
+                $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+            }
+
+            if($file_size > 2097152){
+                $errors[]='File size must be excately 2 MB';
+            }
+
+            if(empty($errors)==true){
+                move_uploaded_file($file_tmp,"uploads/".$file_name);
+                $material->path="/lms/uploads/".$file_name;
+            }else{
+                $imgErr = " cant upload the file !";
+                $valide = false;
+            }
+        }
 
 
+        $material->courseid = $_REQUEST['parent'];
+
+        $material->typeid=1;
+        $material->insert();
+        $result =(object)["status"=>1];
+        return $result;
 
     }
 
