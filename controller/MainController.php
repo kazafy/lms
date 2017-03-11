@@ -185,6 +185,10 @@ class MainController
         }
 
 
+        header("Location: ".$_SERVER['HTTP_REFERER']);
+        exit();
+
+
 
     }
     private function  addCategory($creatorid){
@@ -202,9 +206,16 @@ class MainController
         $course->name = $_REQUEST['name'];
         $course->description = $_REQUEST['desc'];
         $course->creatorid = $creatorid;
+        $course->categoryid = $_REQUEST['category'];
 
+        $course->insert();
 
-
+        $coursetype = new \Course_Type();
+        foreach($_REQUEST['types'] as $t){
+            $coursetype->typeid=$t;
+            $coursetype->courseid=$course->id;
+            $coursetype->insert();
+        }
 
     }
     private function  addMaterial($creatorid){

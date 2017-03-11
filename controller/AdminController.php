@@ -21,10 +21,19 @@ class AdminController
     function showUsers(){
         $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
 
-        $userController =new UserController();
+//        $userController =new UserController();
 //        $users = $userController->userList();
         $users  = \User::Fetchall();
+        $category = new \Category();
+        $course = new \Course();
+        $material = new \Material();
+
+        $categoryNumbers = count(\Category::Fetchall());
+        $courseNumbers = count(\Course::Fetchall());
+        $materialNumbers = count(\Material::Fetchall());
+
         $action = 1;
+        $userNumbers = count($users);
         include "view/admin.php";
     }
     function deleteUser($id){
@@ -36,13 +45,31 @@ class AdminController
             $userTemp->delete();
         }
         $users =\User::Fetchall();
+        $category = new \Category();
+        $course = new \Course();
+        $material = new \Material();
+
+        $categoryNumbers = count(\Category::Fetchall());
+        $courseNumbers = count(\Course::Fetchall());
+        $materialNumbers = count(\Material::Fetchall());
         $action = 1;
+        $userNumbers = count($users);
         include "view/admin.php";
 
     }
 
     function updateUser($id){
         $user = $_SESSION['user'];
+
+        $users =\User::Fetchall();
+        $category = new \Category();
+        $course = new \Course();
+        $material = new \Material();
+
+        $categoryNumbers = count(\Category::Fetchall());
+        $courseNumbers = count(\Course::Fetchall());
+        $materialNumbers = count(\Material::Fetchall());
+        $userNumbers = count($users);
 
         if(isset($_REQUEST['saveid'])) {
             $user = new \User();
@@ -53,7 +80,6 @@ class AdminController
             $user->type=$_REQUEST['type'];
             $user->update();
 //            $userController->updateUser($user);
-            $users =\User::Fetchall();
             include "view/admin.php";
             exit();
         }

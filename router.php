@@ -52,6 +52,7 @@ route('/lms/api/add/(.*)', function($matches){
     checkLogin();
     $mainController =new \controller\MainController();
     $mainController->addBlock($matches[1][0]);
+
     exit;
 });
 route('/lms/api/comments/get/(.*)', function($matches){
@@ -61,6 +62,7 @@ route('/lms/api/comments/get/(.*)', function($matches){
     //checkLogin();
     $mainController =new \controller\MainController();
     $mainController->sendcomments($matches[1][0]);
+    header("Location: http://localhost/lms/views/");
     exit;
 });
 route('/lms/api/comments/submit/(.*)', function($matches){
@@ -252,7 +254,7 @@ route('/lms/logout/', function($matches){
 
     setcookie('user', null, -1, '/');
     unset($_COOKIE['user']);
-    header("Location: http://localhost/lms/home/");
+    header("Location: http://localhost/lms/views/");
     exit;
 });
 ?>

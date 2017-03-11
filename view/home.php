@@ -33,7 +33,7 @@ include "nav.php";
 
                     <!--card-->
 
-                <div  class="col s12 m6 l3" >
+                <div  class="col s12 m6 l4" >
                     <div class="card horizontal hoverable">
 
                         <div id="card<?= $block->id?>" class="card-stacked">
@@ -44,7 +44,7 @@ include "nav.php";
                                 
                                  <?php 
         
-                                  if(1)
+                                  if(! empty($user) && $level==1)
                                 {
                                     ?>
                                 <a class="left com" href="<?=$block->id?>"><i class="material-icons">textsms</i></a>
@@ -76,7 +76,7 @@ include "nav.php";
 
 
                             <div class="card-content ">
-
+                                <form>
                                 <div class="input-field">
 
                                     <input id="name" type="text" value="<?= $block->name?>" name='name' class="validate">
@@ -103,18 +103,18 @@ include "nav.php";
                                     </div>
 
                                     <?php
-                                    foreach ($block->types as $type) {
+                                    foreach ($types as $type) {
                                         ?>
                                         <div class="input-field">
 
-                                            <input name="types[]" value="<?php echo $type->id; ?>" type="checkbox" id="t<?php echo $type->id; ?>"/>
-                                            <label for="t<?php echo $type->id; ?>"><?php echo $type->name; ?></label>
+                                            <input name="types[]" <?=(in_array($type->id,$block->get_types()))?'checked':'';?> value="<?php echo $type->id;?>" type="checkbox" id="t<?php echo $block->id.$type->id; ?>"/>
+                                            <label for="t<?php echo $block->id.$type->id; ?>"><?php echo $type->name; ?></label>
                                         </div>
                                         <?php
                                     }
                                 }
                                 ?>
-
+                                </form>
                             </div>
                             <div class="card-action">
                                 <button onclick="editblock(<?= $block->id?>)"  type="reset" class="btn-block waves-effect waves-light "><i class="material-icons">cancel</i></button>
@@ -138,7 +138,7 @@ include "nav.php";
                 </div>
                 <!--card-->
                 <?php }?>
-                <div id="addCard"  class="col s12 m6 l3">
+                <div id="addCard"  class="col s12 m6 l4">
                         <div class="card  hoverable">
                                 <div onclick="addblock();" class="card-content ">
                                     <h3>+</h3>
@@ -152,7 +152,7 @@ include "nav.php";
                         </div>
                 </div>
 
-                <div id="newblock"  class="col s12 m6 l3 hide">
+                <div id="newblock"  class="col s12 m6 l4 hide">
                     <form id="idForm" method="post" action="/lms/api/add/<?php echo $level;?>"  enctype="multipart/form-data" >
 
                     <div class="card  hoverable">
@@ -220,9 +220,9 @@ include "nav.php";
                             <button onclick="removeMe()" type="reset" class="btn-block waves-effect waves-light "><i class="material-icons">cancel</i></button>
 <!--                            <input type="submit" class="btn waves-effect waves-light"><i class="material-icons">save</i></input>-->
 
-                            <button class="btn-block right waves-effect waves-light" type="submit" name="action">
+                            <input class="btn-block right waves-effect waves-light" type="submit" name="action">
                                 <i class="material-icons right">save</i>
-                            </button>
+                            </input>
                         </div>
 
                     </div>
@@ -350,8 +350,7 @@ include "footer.php";
 var currmodal;
  $(document).ready(function(){
   $('#modal').modal();
- 
-    $('#modal2').modal();
+  $('#modal2').modal();
   });
 
 $("#subcomment").submit(
@@ -541,16 +540,25 @@ $('#modal').modal('open');
 //        });
 //        e.preventDefault(); // avoid to execute the actual submit of the form.
 //    });
-    $("#idForm").submit(function() {
 
-        var formData = new FormData($(this)[0]);
+//    $("#idForm").submit(function(e) {
+//
+//        var formData = new FormData($(this)[0]);
+//
+////        this.preventDefault();
+//
+//        $.post($(this).attr("action"), formData, function(data) {
+//            alert(data);
+//        });
+//
+//        alert("lol");
+//        e.preventDefault();
+//        console.log(e);
+//
+//        return false;
+//    });
 
-        $.post($(this).attr("action"), formData, function(data) {
-            alert(data);
-        });
 
-        return false;
-    });
 
 </script>
 
