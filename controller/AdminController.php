@@ -103,9 +103,11 @@ class AdminController
             $user->country=$_REQUEST['country'];
             $user->signature=$_REQUEST['studentSignature'];
 
-
             $user->update();
+
+           header("Location: http://localhost/lms/home/");
             exit();
+
         }
 
     }

@@ -5,7 +5,7 @@ include "nav.php";
 ?>
 
 <div class="row">
-    <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
+    <form action="/lms/profile/" method="post">
 
     <div class="col l5 offset-l2">
         <div class="row">
@@ -40,11 +40,11 @@ include "nav.php";
                         <br>
                     </div>
 
-                     <input id="test1" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==0) echo "checked";?> />
+                     <input value="1"  id="test1" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==0) echo "checked";?> />
                      <label for="test1">Male</label>
 
 
-                    <input id="test2" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==1) echo "checked";?>/>
+                    <input value="0"  id="test2" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==1) echo "checked";?>/>
                     <label for="test2">Female</label>
 
             </div>
@@ -55,9 +55,9 @@ include "nav.php";
                 <i class="material-icons prefix">language</i>
                 <select name="country">
                     <option value="" disabled <?php if (empty($user->country)) echo "selected";?>>Choose your country</option>
-                    <option value="1" <?php if (isset($user->country) && $user->country=="ISmaliah") echo "selected";?>>ISmaliah</option>
-                    <option value="2" <?php if (isset($user->country) && $user->country=="Cairo") echo "selected";?>>Cairo</option>
-                    <option value="3" <?php if (isset($user->country) && $user->country=="Portsaid") echo "selected";?>>Portsaid</option>
+                    <option value="ISmaliah" <?php if (isset($user->country) && $user->country=="ISmaliah") echo "selected";?>>ISmaliah</option>
+                    <option value="Cairo" <?php if (isset($user->country) && $user->country=="Cairo") echo "selected";?>>Cairo</option>
+                    <option value="Portsaid" <?php if (isset($user->country) && $user->country=="Portsaid") echo "selected";?>>Portsaid</option>
                 </select>
 
             </div>

@@ -10,6 +10,7 @@
                     <?php if(isset($user) && !empty($user)){
                             if ($user->type == 0){
                         ?>
+                        <li><a class="active" href="/lms/profile/">Profile</a></li>
                         <li><a href="/lms/admin/user/list/">Control Panel</a></li>
                                 <?php }?>
                     <li><a href="/lms/logout/"> logout </a></li>
