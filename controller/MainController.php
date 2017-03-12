@@ -64,7 +64,7 @@ class MainController
     
 
         $blocls=['Category','Course','Material'];
-        $baselink='/lms/';
+        $baselink='/';
 
 
 
