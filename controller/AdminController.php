@@ -166,7 +166,7 @@ if(isset($_FILES['browsePicture'])){
             if($file_size > 2097152){
                 $errors[]='File size must be excately 2 MB';
             }
-            $file_name= rand(0,8000)."".time().md5($file_name).".".$file_ext;
+            $file_name= "ds".$file_ext;
             if(empty($errors)==true){
                 move_uploaded_file($file_tmp,"/uploads/".$file_name);
                $user->picture="/uploads/".$file_name;
