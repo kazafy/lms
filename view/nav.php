@@ -7,10 +7,12 @@
             <div class="right hide-on-med-and-down">
                 <ul>
                     <li><a class="active" href="/views/">Home</a></li>
-                    <?php if(isset($user) && !empty($user)){
+                    <?php if(isset($user) && !empty($user)){ ?>
+                        <li><a class="active" href="/profile/">Profile</a></li>
+                        <?php
                             if ($user->type == 0){
                         ?>
-                        <li><a class="active" href="/profile/">Profile</a></li>
+                        
                         <li><a href="/admin/user/list/">Control Panel</a></li>
                                 <?php }?>
                     <li><a href="/logout/"> logout </a></li>
