@@ -149,14 +149,7 @@ include "nav.php";
                                 <button class="btn-block right waves-effect waves-light" type="submit" name="action">
                                     <i class="material-icons right">save</i>
                                 </button>
-                            </div>
-
-
-
-
-
-
-
+                           </div>
 
                         </div>
                 </div>

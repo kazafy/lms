@@ -1,7 +1,7 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper black">
-            <a href="#!" class="brand-logo">Itians</a>
+            <a href="/views/" class="brand-logo">ITIans</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
             <div class="right hide-on-med-and-down">
@@ -24,16 +24,6 @@
 
                 </ul>
             </div>
-            <div class="right hide-on-med-and-down">
-                <form>
-                    <div class="input-field">
-                        <input id="search" type="search" required>
-                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                        <i class="material-icons">close</i>
-                    </div>
-                </form>
-            </div>
-
 
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="/login/"><i class="material-icons">person_pin</i></a></li>
