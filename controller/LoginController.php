@@ -69,19 +69,16 @@ class LoginController
 //                echo $user->password;
 //                echo "<hr/>";
 
-                var_dump(password_verify($userTemp->password,$user->password));
-                echo "<hr/>";
-                var_dump($user);
+
                 if(!empty($user) && password_verify($userTemp->password,$user->password)) {
                     session_start();
-                    var_dump($user);
                     $_SESSION["user"] = $user;
                     if ($rememberMe) {
                         echo "cooke";
                         setcookie("user", serialize($user)); // 86400 = 1 day
-                        exit();
+//                        exit();
                     }
-                    header("Location: http://localhost/lms/home/");
+                    header("Location: http://localhost/lms/views/");
 //                        include "view/home.php";
                     exit();
                 }else{

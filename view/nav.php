@@ -6,7 +6,7 @@
 
             <div class="right hide-on-med-and-down">
                 <ul>
-                    <li><a class="active" href="/lms/home/">Home</a></li>
+                    <li><a class="active" href="/lms/views/">Home</a></li>
                     <?php if(isset($user) && !empty($user)){
                             if ($user->type == 0){
                         ?>
