@@ -35,11 +35,7 @@ include "nav.php";
                                 <input id="password" name="password" type="password" class="validate">
                                 <label for="password">Password</label>
                             </div>
-                            <div class="input-field col offset-s1 s10">
-                                <i class="material-icons prefix">lock_outline</i>
-                                <input id="repassword" type="password" class="validate">
-                                <label for="repassword">Password</label>
-                            </div>
+
                             <!--offset-s2 s10 offset-l2 l10-->
                             <div class="col offset-s1 s11 ">
                                 <p>
@@ -59,7 +55,7 @@ include "nav.php";
 
                             <div class="col offset-s1 s10">
                                 <div class="row ">
-                                    <p class="center-align ">Already have an account?<a href="#" > Login</a></p>
+                                    <p class="center-align ">Already have an account?<a href="/login/" > Login</a></p>
                                 </div>
                             </div>
                             <div class="col offset-s1 s10">

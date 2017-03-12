@@ -1,3 +1,14 @@
+<style>
+    footer {
+        display: flex;
+        min-height:30vh;
+        flex-direction: column;
+    }
+
+    main {
+        flex: 1 0 auto;
+    }
+</style>
 
 
 
