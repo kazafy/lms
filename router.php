@@ -26,7 +26,7 @@ function route($regex, $cb) {
 
 //echo  " lol ";
 
-//route('/api/login', function($matches){
+//route('/lms/api/login', function($matches){
 //    header("Access-Control-Allow-Origin:*");
 //    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
 //
@@ -46,7 +46,7 @@ function route($regex, $cb) {
 //});
 
 
-route('/api/add/(.*)', function($matches){
+route('/lms/api/add/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
     checkLogin();
@@ -55,17 +55,17 @@ route('/api/add/(.*)', function($matches){
 
     exit;
 });
-route('/api/comments/get/(.*)', function($matches){
+route('/lms/api/comments/get/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
    // die();
     //checkLogin();
     $mainController =new \controller\MainController();
     $mainController->sendcomments($matches[1][0]);
-    header("Location: http://localhost/views/");
+    header("Location: http://localhost/lms/views/");
     exit;
 });
-route('/api/comments/submit/(.*)', function($matches){
+route('/lms/api/comments/submit/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
    // die();
@@ -74,7 +74,7 @@ route('/api/comments/submit/(.*)', function($matches){
     $mainController->submitcomments($matches[1][0]);
     exit;
 });
-route('/api/requests/submit/(.*)', function($matches){
+route('/lms/api/requests/submit/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
    // die();
@@ -83,7 +83,7 @@ route('/api/requests/submit/(.*)', function($matches){
     $mainController->submitrequests($matches[1][0]);
     exit;
 });
-route('/material/download/(.*)', function($matches){
+route('/lms/material/download/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
    // die();
@@ -93,7 +93,7 @@ route('/material/download/(.*)', function($matches){
     exit;
 });
 
-route('/api/comments/delete/(.*)', function($matches){
+route('/lms/api/comments/delete/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
    // die();
@@ -102,46 +102,46 @@ route('/api/comments/delete/(.*)', function($matches){
     $mainController->deletecomment($matches[1][0]);
     exit;
 });
-route('/', function($matches){
+route('/lms/', function($matches){
 
 
     include "index.php";
 });
-route('/login/(.*)', function($matches){
+route('/lms/login/(.*)', function($matches){
 
     $loginController = new \controller\LoginController();
     $loginController->loginHandler();
     exit;
 });
 
-route('/register/(.*)', function($matches){
+route('/lms/register/(.*)', function($matches){
     $registerController = new \controller\RegisterController();
     $registerController->registerHandler();
     exit;
 });
 
-route('/admin/user/list/', function($matches){
+route('/lms/admin/user/list/', function($matches){
     checkAdmin();
     $adminController = new \controller\AdminController();
     $adminController->showUsers();
     exit;
 });
 
-route('/admin/user/delete/(.*)', function($matches){
+route('/lms/admin/user/delete/(.*)', function($matches){
     checkAdmin();
     checkNumber($matches[1][0]);
     $adminController = new \controller\AdminController();
     $adminController->deleteUser((int)$matches[1][0]);
     exit;
 });
-route('/admin/user/update/(.*)', function($matches){
+route('/lms/admin/user/update/(.*)', function($matches){
     checkAdmin();
     checkNumber($matches[1][0]);
     $adminController = new \controller\AdminController();
     $adminController->updateUser((int)$matches[1][0]);
     exit;
 });
-route('/admin/post/delete/(.*)', function($matches){
+route('/lms/admin/post/delete/(.*)', function($matches){
     checkAdmin();
     checkNumber($matches[1][0]);
     $mainController =new \controller\MainController();
@@ -151,7 +151,7 @@ route('/admin/post/delete/(.*)', function($matches){
 });
 
 
-route('/([^/]+)/delete/(.*)', function($matches){
+route('/lms/([^/]+)/delete/(.*)', function($matches){
 //    checkLogin();
 //    var_dump($matches[1][0]);
 //    var_dump($matches[2][0]);
@@ -161,25 +161,25 @@ route('/([^/]+)/delete/(.*)', function($matches){
 });
 
 
-route('/admin/post/add/', function($matches){
+route('/lms/admin/post/add/', function($matches){
     checkLogin();
     $mainController =new \controller\MainController();
     $mainController->addPost();
     exit;
 });
 
-route('/admin/post/update/(.*)', function($matches){
+route('/lms/admin/post/update/(.*)', function($matches){
     checkLogin();
     checkNumber($matches[1][0]);
     $mainController =new \controller\MainController();
     $mainController->updatePost($matches[1][0]);
     exit;
 });
-route('/admin/post/list/', function($matches){
+route('/lms/admin/post/list/', function($matches){
 
 });
 
-route('/admin/post/(.*)', function($matches){
+route('/lms/admin/post/(.*)', function($matches){
 //    checkAuth();
     $mainController = new \controller\MainController();
     checkNumber($matches[1][0]);
@@ -187,7 +187,7 @@ route('/admin/post/(.*)', function($matches){
     exit;
 });
 
-route("/views/([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}", function($matches){
+route("/lms/views/([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}([^/]*)(?:/){0,1}", function($matches){
     $var =null;
     $i=count($matches)-1;
     $wmchs=[];
@@ -212,7 +212,7 @@ $wmchs[]='views';
     exit;
 });
 
-route('/views/', function($matches){
+route('/lms/views/', function($matches){
 
     $mainController = new \controller\MainController();
     $mainController->showBlocks("",-1);
@@ -220,19 +220,19 @@ route('/views/', function($matches){
 });
 
 
-route('/admin/(.*)', function($matches){
+route('/lms/admin/(.*)', function($matches){
     checkAdmin();
 });
 
 
-route('/home/(.*)', function($matches){
+route('/lms/home/(.*)', function($matches){
     $mainController = new \controller\MainController();
     $mainController->showBlocks("",-1);
     exit;
 });
 
 
-route('/error', function($matches){
+route('/lms/error', function($matches){
     include "view/errorpage.php";
 
 });
@@ -242,7 +242,7 @@ route('/error', function($matches){
 function checkAdmin(){
     session_start();
     if(!isset($_SESSION['user'])) {
-        header("Location: http://localhost/login/");
+        header("Location: http://localhost/lms/login/");
     }
     else{
         $user = $_SESSION['user'];
@@ -256,7 +256,7 @@ function checkAdmin(){
 function checkLogin(){
     session_start();
     if(!isset($_SESSION['user'])) {
-        header("Location: http://localhost/login/");
+        header("Location: http://localhost/lms/login/");
     }
     else{
         $user = $_SESSION['user'];
@@ -272,7 +272,7 @@ function checkNumber($number){
 }
 
 
-route('/logout/', function($matches){
+route('/lms/logout/', function($matches){
     session_start();
     echo  "logout";
     $_SESSION["user"]=null;
@@ -280,7 +280,7 @@ route('/logout/', function($matches){
 
     setcookie('user', null, -1, '/');
     unset($_COOKIE['user']);
-    header("Location: http://localhost/views/");
+    header("Location: http://localhost/lms/views/");
     exit;
 });
 ?>
