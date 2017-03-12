@@ -178,26 +178,7 @@ if(isset($_FILES['browsePicture'])){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
