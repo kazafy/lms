@@ -179,7 +179,7 @@ if(isset($_FILES['browsePicture'])){
 
 
 }
-echo isset($_FILES['browsePicture']);
+var_dump($_FILES);
 
 
 
