@@ -1,6 +1,6 @@
 <div class="navbar-fixed">
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper black">
             <a href="#!" class="brand-logo">Itians</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
