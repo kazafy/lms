@@ -1,4 +1,14 @@
 
+
+
+
+
+
+
+
+
+<?php if($level>=1){ ?>
+
 <div class="fixed-action-btn">
 <!--    <a class="btn-floating btn-large red">-->
 <!--        <i class="large material-icons">mode_edit</i>-->
@@ -15,6 +25,7 @@
 </div>
 
 
+<?php } ?>
 
 <footer class="page-footer black">
 <!--    <div class="container">-->
