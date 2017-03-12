@@ -179,13 +179,13 @@ if(isset($_FILES['browsePicture'])){
 
 
 }
-
+echo isset($_FILES['browsePicture']);
 
 
 
 
             $user->update();
-
+die();
            header("Location: /views/");
             exit();
 
