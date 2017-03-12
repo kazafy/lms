@@ -357,7 +357,7 @@ include "nav.php";
 
 
 <div id="modal2" class="modal">
-    <iframe scrolling=0 class="viewobj" src="/10.pdf"></iframe>
+    <iframe scrolling=0 class="viewobj" src=""></iframe>
     </div>
 
 
