@@ -106,10 +106,8 @@ class AdminController
         foreach ($requests as $request){
 
             $user = new \User();
-//            $request->user = \User::Fetch($request->creatorid);
-            $user = \User::Fetch(53);
+            $user = \User::Fetch($request->creatorid);
             $request->creatorid = $user;
-            $request->creatorid->picture ="/uploads/k.jpg";
         }
 
 

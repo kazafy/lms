@@ -83,7 +83,7 @@ include "nav.php";
 
 
                             <div class="card-content ">
-                                <form>
+                                <form method="post" action="/api/update/<?php echo $level;?>" >
                                 <div class="input-field">
 
                                     <input id="name" type="text" value="<?= $block->name?>" name='name' class="validate">

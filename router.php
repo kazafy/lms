@@ -55,6 +55,17 @@ route('/api/add/(.*)', function($matches){
 
     exit;
 });
+route('/api/update/(.*)', function($matches){
+    header("Access-Control-Allow-Origin:*");
+    header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
+    checkLogin();
+    $mainController =new \controller\MainController();
+    $mainController->addBlock($matches[1][0]);
+
+    exit;
+});
+
+
 route('/api/comments/get/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");

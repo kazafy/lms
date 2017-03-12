@@ -242,9 +242,37 @@ header('Location: '.$_SERVER['HTTP_REFERER']);
 header('Location: '.$_SERVER['HTTP_REFERER']);
         exit();
 
+    }
 
+    function updateBlock($level) {
+
+
+        $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
+
+        switch ($level){
+            case -1:
+                echo json_encode($this->updateCategory($user->id));
+                break;
+            case 0:
+                echo json_encode($this->updateCourse($user->id));
+                break;
+            case 1:
+                echo json_encode($this->updateMaterial($user->id));
+                break;
+            default:
+                $error = "page not found";
+                include ("view/errorpage.php");
+                exit();
+        }
+
+
+        header('Location: '.$_SERVER['HTTP_REFERER']);
+        exit();
 
     }
+
+
+
     private function  addCategory($creatorid){
         $category = new \Category();
         $category->name = $_REQUEST['name'];
@@ -323,15 +351,64 @@ header('Location: '.$_SERVER['HTTP_REFERER']);
 
        // $material->typeid=1;
         $material->insert();
-        var_dump($_FILES);
-        die();
         $result =(object)["status"=>1];
         return $result;
 
     }
 
 
-    function postPreviewHandeler($id){
+
+    private function  updateCategory($creatorid){
+        $category = new \Category();
+        $category->name = $_REQUEST['name'];
+        $category->description = $_REQUEST['desc'];
+        $category->creatorid = $creatorid;
+        $category->update();
+        $result =(object)["status"=>1];
+        return $result;
+
+    }
+    private function  updateCourse($creatorid){
+        $course = new \Course();
+        $course->name = $_REQUEST['name'];
+        $course->description = $_REQUEST['desc'];
+        $course->creatorid = $creatorid;
+        $course->categoryid = $_REQUEST['category'];
+
+        $course->update();
+
+        $coursetype = new \Course_Type();
+        foreach($_REQUEST['types'] as $t){
+            $coursetype->typeid=$t;
+            $coursetype->courseid=$course->id;
+            $coursetype->update();
+        }
+
+    }
+    private function  updateMaterial($creatorid)
+    {
+        $material = new \Material();
+        $material->name = $_REQUEST['name'];
+        $material->description = $_REQUEST['desc'];
+        $material->creatorid = $creatorid;
+        $material->courseid = $_REQUEST['parent'];
+
+        $material->dowanladable = ($_REQUEST['d'])?0:1;
+        $material->viewable = ($_REQUEST['v'])?0:1;
+
+        // $material->typeid=1;
+        $material->update();
+        $result = (object)["status" => 1];
+        return $result;
+    }
+
+
+
+
+
+
+
+        function postPreviewHandeler($id){
         session_start();
         $user = (isset($_SESSION['user']))?$_SESSION['user']:null;
         if($user == null){
