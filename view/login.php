@@ -48,12 +48,7 @@ include "nav.php";
                                 <br />
                             </div>
 
-                            <div class="col offset-s1 s10">
-                                <div class="row ">
-                                    <a href="#" >Create Acount</a>
-                                    <a href="#" class="right">Forget Password</a>
-                                </div>
-                            </div>
+
                             <div class="col offset-s1 s10">
                                 <span><?php if(!empty($emailErr)) echo $emailErr;?></span>
                                 <span><?php if (!empty($passwordErr)) echo $passwordErr;?></span>

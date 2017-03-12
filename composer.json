@@ -1,1 +1,10 @@
-{"require": { "php": "^7.0.10"  }}
+{
+    
+
+
+    "require": { "php": "^7.0.10" ,  "ext-PDO": "*",
+        "ext-gettext": "*"}
+
+
+
+}
