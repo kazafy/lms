@@ -40,11 +40,11 @@ include "nav.php";
                         <br>
                     </div>
 
-                     <input value="1"  id="test1" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==0) echo "checked";?> />
+                     <input value="1"  id="test1" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==1) echo "checked";?> />
                      <label for="test1">Male</label>
 
 
-                    <input value="0"  id="test2" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==1) echo "checked";?>/>
+                    <input value="0"  id="test2" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==0) echo "checked";?>/>
                     <label for="test2">Female</label>
 
             </div>
