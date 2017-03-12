@@ -311,7 +311,7 @@ header('Location: '.$_SERVER['HTTP_REFERER']);
             $file_name= rand(0,8000)."".time().md5($file_name).".".$file_ext;
             if(empty($errors)==true){
                 move_uploaded_file($file_tmp,"uploads/".$file_name);
-                $material->path="/lms/uploads/".$file_name;
+                $material->path="/uploads/".$file_name;
             }else{
                 $imgErr = " cant upload the file !";
                 $valide = false;
@@ -357,7 +357,7 @@ header('Location: '.$_SERVER['HTTP_REFERER']);
         }else{
             echo  " not allowed ";
         }
-        header("Location: http://localhost/lms/home/");
+        header("Location: /home/");
         exit();
 
 

@@ -6,17 +6,17 @@
 
             <div class="right hide-on-med-and-down">
                 <ul>
-                    <li><a class="active" href="/lms/views/">Home</a></li>
+                    <li><a class="active" href="/views/">Home</a></li>
                     <?php if(isset($user) && !empty($user)){
                             if ($user->type == 0){
                         ?>
-                        <li><a class="active" href="/lms/profile/">Profile</a></li>
-                        <li><a href="/lms/admin/user/list/">Control Panel</a></li>
+                        <li><a class="active" href="/profile/">Profile</a></li>
+                        <li><a href="/admin/user/list/">Control Panel</a></li>
                                 <?php }?>
-                    <li><a href="/lms/logout/"> logout </a></li>
+                    <li><a href="/logout/"> logout </a></li>
                     <?php  } else {?>
-                    <li><a class="active" href="/lms/register/">Register</a></li>
-                    <li><a href="/lms/login/">login</a></li>
+                    <li><a class="active" href="/register/">Register</a></li>
+                    <li><a href="/login/">login</a></li>
                     <?php  } ?>
 
 
@@ -34,8 +34,8 @@
 
 
             <ul class="side-nav" id="mobile-demo">
-                <li><a href="/lms/login/""><i class="material-icons">person_pin</i></a></li>
-                <li><a href="/lms/register/"><i class="material-icons">contacts</i></a></li>
+                <li><a href="/login/"><i class="material-icons">person_pin</i></a></li>
+                <li><a href="/register/"><i class="material-icons">contacts</i></a></li>
             </ul>
         </div>
     </nav>

@@ -5,7 +5,7 @@ include "nav.php";
 ?>
 
 <div class="row">
-    <form action="/lms/profile/" method="post">
+    <form action="/profile/" method="post">
 
     <div class="col l5 offset-l2">
         <div class="row">
@@ -99,7 +99,7 @@ include "nav.php";
             <div class="card-panel grey lighten-5 z-depth-1">
                 <div class="row">
                     <div class="col s12">
-                        <img src="<?php echo '/lms';if (!empty($user->picture)){ echo $user->picture;}else {echo '/uploads/images.png'; }?>"  class="circle responsive-img" > <!-- notice the "circle" class -->
+                        <img src="<?php if (!empty($user->picture)){ echo $user->picture;}else {echo '/uploads/images.png'; }?>"  class="circle responsive-img" > <!-- notice the "circle" class -->
                     </div>
 
                     <div class="row">

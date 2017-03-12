@@ -78,7 +78,7 @@ class LoginController
                         setcookie("user", serialize($user)); // 86400 = 1 day
 //                        exit();
                     }
-                    header("Location: http://localhost/lms/views/");
+                    header("Location: /views/");
 //                        include "view/home.php";
                     exit();
                 }else{

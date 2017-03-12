@@ -39,7 +39,7 @@ class AdminController
 //            $request->user = \User::Fetch($request->creatorid);
             $user = \User::Fetch(53);
             $request->creatorid = $user;
-            $request->creatorid->picture ="/lms/uploads/k.jpg";
+            $request->creatorid->picture ="/uploads/k.jpg";
         }
 
         $action = 1;
@@ -52,7 +52,7 @@ class AdminController
         $request = \Request::Fetch($id);
         $request->delete();
 
-        header("Location: http://localhost/lms/admin/user/list/");
+        header("Location: /admin/user/list/");
 
     }
 
@@ -77,7 +77,7 @@ class AdminController
 //            $request->user = \User::Fetch($request->creatorid);
             $user = \User::Fetch(53);
             $request->creatorid = $user;
-            $request->creatorid->picture ="/lms/uploads/k.jpg";
+            $request->creatorid->picture ="/uploads/k.jpg";
         }
 
         $categoryNumbers = count(\Category::Fetchall());
@@ -109,7 +109,7 @@ class AdminController
 //            $request->user = \User::Fetch($request->creatorid);
             $user = \User::Fetch(53);
             $request->creatorid = $user;
-            $request->creatorid->picture ="/lms/uploads/k.jpg";
+            $request->creatorid->picture ="/uploads/k.jpg";
         }
 
 
@@ -150,7 +150,7 @@ class AdminController
 
             $user->update();
 
-           header("Location: http://localhost/lms/home/");
+           header("Location: /home/");
             exit();
 
         }
