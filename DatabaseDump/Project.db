@@ -147,7 +147,7 @@ CREATE TABLE `Material` (
   `name` varchar(30) NOT NULL,
   `description` blob NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `path` varchar(60) NOT NULL,
+  `path` varchar(160) NOT NULL,
   `creatorid` int(11) unsigned DEFAULT NULL,
   `courseid` int(11) unsigned NOT NULL,
   `typeid` int(11) unsigned NOT NULL,
