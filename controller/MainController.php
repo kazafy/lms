@@ -323,6 +323,8 @@ header('Location: '.$_SERVER['HTTP_REFERER']);
 
        // $material->typeid=1;
         $material->insert();
+        var_dump($_FILES);
+        die();
         $result =(object)["status"=>1];
         return $result;
 
