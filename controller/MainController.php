@@ -151,7 +151,7 @@ readfile($file_url);
         $blok= $ref->newInstance();
         $blok->id=$id;
         $blok->delete();
-
+header('Location: '.$_SERVER['HTTP_REFERER']);
 
 
     }

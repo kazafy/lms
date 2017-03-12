@@ -36,7 +36,7 @@ include "nav.php";
                 <div  class="col s12 m6 l4" >
                     <div class="card horizontal hoverable">
 
-                        <div id="card<?= $block->id?> class="card-stacked">
+                        <div id="card<?= $block->id?>" class="card-stacked">
                             <div class="card-content" <?php if ($level!=1){ ?>onclick="window.location.href='<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>/' <?php } ?>">
                                         <p class="truncate teal-text"> <?php echo $block->name;?></p>
                             </div>
