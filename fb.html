@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>login </title>
+
+
+  </head>
+  <body>
+
+    <button type="button" name="butt" id="but">FB</button>
+    <script type="text/javascript">
+      var mybut=document.getElementById('but');
+      console.log(mybut);
+      mybut.onclick = function(){
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '263010544141396',
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+      console.log("finished ui**");
+
+      FB.AppEvents.logPageView();
+      FB.ui({
+              method: 'share_open_graph',
+              href: 'https://developers.facebook.com/docs/',
+            },
+              function(response) {
+              if (response && !response.error_message) {
+                alert('Posting completed.');
+              } else {
+                alert('Error while posting.');
+              }
+            }
+          );
+    };
+console.log("finished ui");
+  };
+
+
+    </script>
+
+  </body>
+</html>
