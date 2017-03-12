@@ -7,7 +7,7 @@
 
 
 
-<?php if($level>=1){ ?>
+<?php if($level>=0){ ?>
 
 <div class="fixed-action-btn">
 <!--    <a class="btn-floating btn-large red">-->
