@@ -55,7 +55,7 @@ include "nav.php";
                 <i class="material-icons prefix">language</i>
                 <select name="country">
                     <option value="" disabled <?php if (empty($user->country)) echo "selected";?>>Choose your country</option>
-                    <option value="ISmaliah" <?php if (isset($user->country) && $user->country=="ISmaliah") echo "selected";?>>ISmaliah</option>
+                    <option value="Ismaliah" <?php if (isset($user->country) && $user->country=="Ismaliah") echo "selected";?>>ISmaliah</option>
                     <option value="Cairo" <?php if (isset($user->country) && $user->country=="Cairo") echo "selected";?>>Cairo</option>
                     <option value="Portsaid" <?php if (isset($user->country) && $user->country=="Portsaid") echo "selected";?>>Portsaid</option>
                 </select>
