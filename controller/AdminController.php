@@ -32,10 +32,31 @@ class AdminController
         $courseNumbers = count(\Course::Fetchall());
         $materialNumbers = count(\Material::Fetchall());
 
+        $requests = \Request::Fetchall();
+        foreach ($requests as $request){
+
+            $user = new \User();
+//            $request->user = \User::Fetch($request->creatorid);
+            $user = \User::Fetch(53);
+            $request->creatorid = $user;
+            $request->creatorid->picture ="/lms/uploads/k.jpg";
+        }
+
         $action = 1;
         $userNumbers = count($users);
         include "view/admin.php";
     }
+
+    function deleteRequest($id){
+        $request = new \Request();
+        $request = \Request::Fetch($id);
+        $request->delete();
+
+        header("Location: http://localhost/lms/admin/user/list/");
+
+    }
+
+
     function deleteUser($id){
         $user = $_SESSION['user'];
         $userController =new UserController();
@@ -48,6 +69,16 @@ class AdminController
         $category = new \Category();
         $course = new \Course();
         $material = new \Material();
+
+        $requests = \Request::Fetchall();
+        foreach ($requests as $request){
+
+            $user = new \User();
+//            $request->user = \User::Fetch($request->creatorid);
+            $user = \User::Fetch(53);
+            $request->creatorid = $user;
+            $request->creatorid->picture ="/lms/uploads/k.jpg";
+        }
 
         $categoryNumbers = count(\Category::Fetchall());
         $courseNumbers = count(\Course::Fetchall());
@@ -71,20 +102,34 @@ class AdminController
         $materialNumbers = count(\Material::Fetchall());
         $userNumbers = count($users);
 
+        $requests = \Request::Fetchall();
+        foreach ($requests as $request){
+
+            $user = new \User();
+//            $request->user = \User::Fetch($request->creatorid);
+            $user = \User::Fetch(53);
+            $request->creatorid = $user;
+            $request->creatorid->picture ="/lms/uploads/k.jpg";
+        }
+
+
+        $users = \User::Fetchall();
+
+
+
         if(isset($_REQUEST['saveid'])) {
             $user = new \User();
             $user->id=$_REQUEST['saveid'];
             $user->name=$_REQUEST['username'];
             $user->email=$_REQUEST['email'];
-//            $user->setPhone=$_REQUEST['phone'];
+            $user->gender=$_REQUEST['gender'];
             $user->type=$_REQUEST['type'];
             $user->update();
-//            $userController->updateUser($user);
+            $users = \User::Fetchall();
             include "view/admin.php";
             exit();
         }
 
-        $users = \User::Fetchall();
         if($id != 1) {
             $action = 2;
             $updateId = $id;

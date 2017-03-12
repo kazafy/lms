@@ -144,6 +144,15 @@ route('/lms/admin/user/list/', function($matches){
     exit;
 });
 
+route('/lms/request/delete/(.*)', function($matches){
+    checkAdmin();
+    $adminController = new \controller\AdminController();
+    $adminController->deleteRequest($matches[1][0]);
+
+    exit;
+});
+
+
 route('/lms/admin/user/delete/(.*)', function($matches){
     checkAdmin();
     checkNumber($matches[1][0]);

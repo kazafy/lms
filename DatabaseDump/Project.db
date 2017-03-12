@@ -27,7 +27,7 @@ CREATE TABLE `Category` (
   `name` varchar(30) NOT NULL,
   `description` blob NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `creatorid` int(11) unsigned ,
+  `creatorid` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `creatoid` (`creatorid`),
   CONSTRAINT `creatoid` FOREIGN KEY (`creatorid`) REFERENCES `User` (`id`) ON DELETE SET NULL
@@ -87,7 +87,7 @@ CREATE TABLE `Course` (
   `name` varchar(30) NOT NULL,
   `description` blob NOT NULL,
   `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `creatorid` int(11) unsigned ,
+  `creatorid` int(11) unsigned DEFAULT NULL,
   `categoryid` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `coursecreatorf` (`creatorid`),
@@ -161,7 +161,7 @@ CREATE TABLE `Material` (
   CONSTRAINT `matcoidf` FOREIGN KEY (`courseid`) REFERENCES `Course` (`id`) ON DELETE CASCADE,
   CONSTRAINT `mattyidf` FOREIGN KEY (`typeid`) REFERENCES `Type` (`id`) ON DELETE CASCADE,
   CONSTRAINT `matusidf` FOREIGN KEY (`creatorid`) REFERENCES `User` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +170,7 @@ CREATE TABLE `Material` (
 
 LOCK TABLES `Material` WRITE;
 /*!40000 ALTER TABLE `Material` DISABLE KEYS */;
-INSERT INTO `Material` VALUES (3,'book','lololol','2017-03-10 19:14:24','/lms/k.jpg',31,1,3,1,1,4),(5,'lol','lololol','2017-03-10 19:14:50','/lms/10.pdf',31,2,2,1,1,0),(6,'hfhg','hghghmnb','2017-03-12 00:38:41','',53,2,1,1,1,0),(7,'hfhg','hghghmnb','2017-03-12 00:38:44','',53,2,1,1,1,0),(8,'hfhg','hghghmnb','2017-03-12 00:38:44','',53,2,1,1,1,0),(9,'hfhg','hghghmnb','2017-03-12 00:38:44','',53,2,1,1,1,0),(10,'hfhg','hghghmnb','2017-03-12 00:38:44','',53,2,1,1,1,0),(11,'hfhg','hghghmnb','2017-03-12 00:38:45','',53,2,1,1,1,0);
+INSERT INTO `Material` VALUES (3,'book','lololol','2017-03-10 19:14:24','/lms/k.jpg',31,1,3,1,1,4),(5,'lol','lololol','2017-03-10 19:14:50','/lms/10.pdf',31,2,2,1,1,0),(6,'hfhg','hghghmnb','2017-03-12 00:38:41','',53,2,1,1,1,0),(7,'hfhg','hghghmnb','2017-03-12 00:38:44','',53,2,1,1,1,0),(8,'hfhg','hghghmnb','2017-03-12 00:38:44','',53,2,1,1,1,0),(9,'hfhg','hghghmnb','2017-03-12 00:38:44','',53,2,1,1,1,0),(10,'hfhg','hghghmnb','2017-03-12 00:38:44','',53,2,1,1,1,0),(11,'hfhg','hghghmnb','2017-03-12 00:38:45','',53,2,1,1,1,0),(12,'afdsd','fsdf','2017-03-12 07:37:15','/lms/uploads/40891489304235b5cbed784fb93e57925a2939da1710fcjpg',53,2,1,1,1,0),(13,'sfsdf','fsdfs','2017-03-12 07:37:55','',53,2,1,1,1,1),(14,'sdf','fsdfsd','2017-03-12 07:39:00','',53,2,1,1,1,0),(15,'fsdfsdf','fsdfsd','2017-03-12 07:39:39','/lms/uploads/400614893043796cb8f6e9d265535cb7ce8bfffb21f139.jpg',53,2,1,1,1,1),(25,'dfs','sdfsdf','2017-03-12 07:51:38','/lms/uploads/35511489305098b5cbed784fb93e57925a2939da1710fc.jpg',53,1,3,1,1,0);
 /*!40000 ALTER TABLE `Material` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -191,7 +191,7 @@ CREATE TABLE `Request` (
   PRIMARY KEY (`id`),
   KEY `matusidf` (`creatorid`),
   CONSTRAINT `requsidf` FOREIGN KEY (`creatorid`) REFERENCES `User` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +200,7 @@ CREATE TABLE `Request` (
 
 LOCK TABLES `Request` WRITE;
 /*!40000 ALTER TABLE `Request` DISABLE KEYS */;
-INSERT INTO `Request` VALUES (1,'sfd','fsdsf','2017-03-11 18:04:21',53,0),(2,'sdf','fsdfsdf','2017-03-11 18:04:34',53,0),(3,'dsf','fsdf','2017-03-11 18:04:45',53,1),(4,'hatal','dafsdfsdfsd','2017-03-11 18:05:42',53,1),(5,'LOLOLOLO','ytttttttttttt','2017-03-12 00:39:52',53,0);
+INSERT INTO `Request` VALUES (1,'sfd','fsdsf','2017-03-11 18:04:21',53,0),(2,'sdf','fsdfsdf','2017-03-11 18:04:34',53,0),(3,'dsf','fsdf','2017-03-11 18:04:45',53,1),(4,'hatal','dafsdfsdfsd','2017-03-11 18:05:42',53,1),(5,'LOLOLOLO','ytttttttttttt','2017-03-12 00:39:52',53,0),(6,'Hellp','kdgskdfhgkfdhkjgd','2017-03-12 07:52:43',53,0);
 /*!40000 ALTER TABLE `Request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,6 +249,7 @@ CREATE TABLE `User` (
   `banend` datetime DEFAULT NULL,
   `type` int(11) unsigned NOT NULL DEFAULT '1',
   `gender` tinyint(1) DEFAULT NULL,
+  `country` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=latin1;
@@ -260,7 +261,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (31,'ahmedddd','eedd',NULL,NULL,'12','2017-03-10 17:50:59',1,NULL,NULL,0,0),(39,'kl','k@f.m',NULL,NULL,'123','2017-03-09 15:12:43',1,NULL,NULL,0,0),(40,'kkkkkkk','k@k.kll.l',NULL,NULL,'123','2017-03-09 14:24:52',1,NULL,NULL,0,0),(41,'lkkl','l@l.l',NULL,NULL,'123','2017-03-09 14:43:08',1,NULL,NULL,1,0),(42,'a','a@a.a',NULL,NULL,'123','2017-03-08 20:18:10',1,NULL,NULL,1,0),(43,'m','m@m.m',NULL,NULL,'$2y$10$R2RVQoiFslRTQFtU7Z9W6OzVzcpN7smBA0iHm9biAh21kAxz8Wrki','2017-03-09 17:07:59',1,NULL,NULL,0,0),(46,'p','p@p.p',NULL,NULL,'$2y$10$QOa0nE3EUszRagi5VZU/Pe8pHvRxM7KS0iJ1MhiX8sq.S07KaJVFW','2017-03-08 20:34:06',1,NULL,NULL,1,0),(48,'nm','n@n.n',NULL,NULL,'$2y$10$UvWn5aStE4Lo9s3ZPxHyV.7riM4ZcsstZVY/7lws7TtXDpmxGeiqu','2017-03-09 14:18:18',1,NULL,NULL,0,0),(49,'mn','m@l.c',NULL,NULL,'$2y$10$dGD7eJ/xWN1c8s4nH0bfC.DMNc34b/jJttxJcOYqUJVU9hNiEmcMq','2017-03-09 14:05:31',1,NULL,NULL,1,0),(50,'admin','admin@admin.com',NULL,NULL,'$2y$10$jiRNB5VC8ypasZPRsL8KNeDIjRMagI17aYi69f9x096pHl18xj.NO','2017-03-08 21:00:53',1,NULL,NULL,1,0),(53,'m','m@m',NULL,NULL,'$2y$10$Juuf/ZFhsIc7HY/h13T1u.Cm4h4xk5NtH8H5SgHoTh3x7BKVMlLkm','2017-03-09 17:07:59',1,NULL,NULL,0,0);
+INSERT INTO `User` VALUES (31,'ahmedddd','eedd',NULL,NULL,'12','2017-03-10 17:50:59',1,NULL,NULL,0,0,NULL),(39,'kl','k@f.m',NULL,NULL,'123','2017-03-09 15:12:43',1,NULL,NULL,0,0,NULL),(40,'kkkkkkk','k@k.kll.l',NULL,NULL,'123','2017-03-09 14:24:52',1,NULL,NULL,0,0,NULL),(41,'lkkl','l@l.l',NULL,NULL,'123','2017-03-09 14:43:08',1,NULL,NULL,1,0,NULL),(42,'a','a@a.a',NULL,NULL,'123','2017-03-08 20:18:10',1,NULL,NULL,1,0,NULL),(43,'m','m@m.m',NULL,NULL,'$2y$10$R2RVQoiFslRTQFtU7Z9W6OzVzcpN7smBA0iHm9biAh21kAxz8Wrki','2017-03-09 17:07:59',1,NULL,NULL,0,0,NULL),(46,'p','p@p.p',NULL,NULL,'$2y$10$QOa0nE3EUszRagi5VZU/Pe8pHvRxM7KS0iJ1MhiX8sq.S07KaJVFW','2017-03-08 20:34:06',1,NULL,NULL,1,0,NULL),(48,'nm','n@n.n',NULL,NULL,'$2y$10$UvWn5aStE4Lo9s3ZPxHyV.7riM4ZcsstZVY/7lws7TtXDpmxGeiqu','2017-03-09 14:18:18',1,NULL,NULL,0,0,NULL),(49,'mn','m@l.c',NULL,NULL,'$2y$10$dGD7eJ/xWN1c8s4nH0bfC.DMNc34b/jJttxJcOYqUJVU9hNiEmcMq','2017-03-09 14:05:31',1,NULL,NULL,1,0,NULL),(50,'admin','admin@admin.com',NULL,NULL,'$2y$10$jiRNB5VC8ypasZPRsL8KNeDIjRMagI17aYi69f9x096pHl18xj.NO','2017-03-08 21:00:53',1,NULL,NULL,1,0,NULL),(53,'m','m@m',NULL,NULL,'$2y$10$Juuf/ZFhsIc7HY/h13T1u.Cm4h4xk5NtH8H5SgHoTh3x7BKVMlLkm','2017-03-09 17:07:59',1,NULL,NULL,0,0,NULL);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -273,4 +274,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-12  2:41:28
+-- Dump completed on 2017-03-12 17:52:23
