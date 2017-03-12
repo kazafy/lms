@@ -150,7 +150,7 @@ class AdminController
 
             $user->update();
 
-           header("Location: /home/");
+           header("Location: /views/");
             exit();
 
         }
