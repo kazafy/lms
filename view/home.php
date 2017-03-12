@@ -33,10 +33,10 @@ include "nav.php";
 
                     <!--card-->
 
-                <div class="col s12 m6 l3" >
+                <div  class="col s12 m6 l4" >
                     <div class="card horizontal hoverable">
 
-                        <div class="card-stacked">
+                        <div id="card<?= $block->id?> class="card-stacked">
                             <div class="card-content" <?php if ($level!=1){ ?>onclick="window.location.href='<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>/' <?php } ?>">
                                         <p class="truncate teal-text"> <?php echo $block->name;?></p>
                             </div>
@@ -44,7 +44,7 @@ include "nav.php";
                                 
                                  <?php 
         
-                                  if(1)
+                                  if(! empty($user) && $level==1)
                                 {
                                     ?>
                                 <a class="left com" href="<?=$block->id?>"><i class="material-icons">textsms</i></a>
@@ -58,27 +58,87 @@ include "nav.php";
                                 <?php  if(! empty($user) && $user->type == 0)
                                 {
                                     ?>
-                                    <a class="right  btn-block waves-effect waves-light "
-                                       href="/lms/admin/post/update/<?php echo $block->id;?>"><i class="material-icons">edit</i></a>
+                                    <a onclick='editblock(<?= $block->id?>)' class="right  btn-block waves-effect waves-light "><i class="material-icons">edit</i></a>
                                     <a class="right btn-block  waves-effect waves-light "
                                        href="/lms/<?php echo $block->tablename;?>/delete/<?php echo $block->id;?>"><i class="material-icons">delete</i></a>
 
                                     <?php
                                 }elseif(! empty($user) && $user->id == $block->creatorid)
                                 {  ?>
-                                    <a class="right btn-block  waves-effect waves-light "
-                                       href="/lms/admin/post/update/<?php echo $block->id;?>"><i class="material-icons">edit</i></a>
+                                    <a onclick="editblock(<?= $block->id?>)" class="right btn-block  waves-effect waves-light "><i class="material-icons">edit</i></a>
                                 <?php   }?>
 
 
                             </div>
+                        </div>
+
+                        <div id="cardh<?= $block->id?>" class="card-stacked hide">
+
+
+                            <div class="card-content ">
+                                <form>
+                                <div class="input-field">
+
+                                    <input id="name" type="text" value="<?= $block->name?>" name='name' class="validate">
+                                    <label for="name">name</label>
+                                </div>
+                                <div class="input-field">
+                                    <input id="desc" type="text" name="desc" value="<?= $block->description?>" class="validate">
+                                    <label for="desc">description</label>
+                                </div>
+                                <?php if($level == 0) {
+                                    ?>
+                                    <input type="hidden" name="parent" value="<?=$parentId?>"/>
+                                    <label for="cat">Select Category</label>
+                                    <div class="input-field">
+                                        <select id="cat" name="category" class="browser-default">
+                                            <?php
+                                            foreach ($catogeries as $category) {
+                                                ?>
+                                                <option  value="<?= $category -> id; ?> <?= ($category->id== $block->categoryid?'selected':'' )?>"><?= $category->name; ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+
+                                    <?php
+                                    foreach ($types as $type) {
+                                        ?>
+                                        <div class="input-field">
+
+                                            <input name="types[]" <?=(in_array($type->id,$block->get_types()))?'checked':'';?> value="<?php echo $type->id;?>" type="checkbox" id="t<?php echo $block->id.$type->id; ?>"/>
+                                            <label for="t<?php echo $block->id.$type->id; ?>"><?php echo $type->name; ?></label>
+                                        </div>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                                </form>
+                            </div>
+                            <div class="card-action">
+                                <button onclick="editblock(<?= $block->id?>)"  type="reset" class="btn-block waves-effect waves-light "><i class="material-icons">cancel</i></button>
+                                <!--                            <input type="submit" class="btn waves-effect waves-light"><i class="material-icons">save</i></input>-->
+
+                                <button class="btn-block right waves-effect waves-light" type="submit" name="action">
+                                    <i class="material-icons right">save</i>
+                                </button>
+                            </div>
+
+
+
+
+
+
+
+
                         </div>
                     </div>
 
                 </div>
                 <!--card-->
                 <?php }?>
-                <div id="addCard"  class="col s12 m6 l3">
+                <div id="addCard"  class="col s12 m6 l4">
                         <div class="card  hoverable">
                                 <div onclick="addblock();" class="card-content ">
                                     <h3>+</h3>
@@ -92,8 +152,8 @@ include "nav.php";
                         </div>
                 </div>
 
-                <div id="newblock"  class="col s12 m6 l3 hide">
-                    <form id="idForm" >
+                <div id="newblock"  class="col s12 m6 l4 hide">
+                    <form id="idForm" method="post" action="/lms/api/add/<?php echo $level;?>"  enctype="multipart/form-data" >
 
                     <div class="card  hoverable">
 
@@ -110,25 +170,28 @@ include "nav.php";
                             </div>
                             <?php if($level == 0) {
                                 ?>
+                                <input type="hidden" name="parent" value="<?=$parentId?>"/>
                                 <label for="cat">Select Category</label>
                             <div class="input-field">
-                                <select id="cat" class="browser-default">
+                                <select id="cat" name="category" class="browser-default">
                                     <?php
                                         foreach ($catogeries as $category) {
                                             ?>
-                                            <option value="<?= $category - id; ?>"><?= $category->name; ?></option>
+                                            <option value="<?= $category -> id; ?>"><?= $category->name; ?></option>
                                             <?php
                                         }
                                             ?>
                                 </select>
                             </div>
-                            <div class="input-field">
 
                             <?php
                                 foreach ($types as $type) {
                                     ?>
-                                    <input type="checkbox" id="t<?php echo $type->id; ?>"/>
+                            <div class="input-field">
+
+                                    <input name="types[]" value="<?php echo $type->id; ?>" type="checkbox" id="t<?php echo $type->id; ?>"/>
                                     <label for="t<?php echo $type->id; ?>"><?php echo $type->name; ?></label>
+                            </div>
                                     <?php
                             }
                             }
@@ -139,12 +202,13 @@ include "nav.php";
                                 <div class="file-field input-field">
                                     <div class="btn-large">
                                         <span>File</span>
-                                        <input type="file">
+                                        <input name="file" type="file">
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text">
                                     </div>
                                 </div>
+                                <input type="hidden" name="parent" value="<?=$parentId?>"/>
 
                                 <?php
 
@@ -156,10 +220,11 @@ include "nav.php";
                             <button onclick="removeMe()" type="reset" class="btn-block waves-effect waves-light "><i class="material-icons">cancel</i></button>
 <!--                            <input type="submit" class="btn waves-effect waves-light"><i class="material-icons">save</i></input>-->
 
-                            <button class="btn-block right waves-effect waves-light" type="submit" name="action">
+                            <input class="btn-block right waves-effect waves-light" type="submit" name="action">
                                 <i class="material-icons right">save</i>
-                            </button>
+                            </input>
                         </div>
+
                     </div>
                     </form>
                 </div>
@@ -327,13 +392,12 @@ include "nav.php";
 <?php
 
 include "footer.php";
-session_start();
 
 ?>
 <script>
 var currmodal;
-var userid = <?= $_SESSION["user"]->id; ?>;
-var usertype = <?= $_SESSION["user"]->type; ?>
+var userid = <?= $user->id; ?>;
+var usertype = <?= $user->type; ?>
 
 
 
@@ -353,7 +417,6 @@ var usertype = <?= $_SESSION["user"]->type; ?>
 
  $(document).ready(function(){
   $('#modal').modal();
- 
     $('#modal2').modal();
      $('#modal3').modal();
       $('select').material_select();
@@ -613,6 +676,47 @@ $('#modal').modal('open');
         return;
 
     }
+    function editblock(id) {
+        var card  = document.getElementById("card"+id);
+        var cardh = document.getElementById("cardh"+id);
+
+        card.classList.toggle("hide");
+        cardh.classList.toggle("hide");
+
+    }
+
+//    $("#idForm").submit(function(e) {
+//        var url = "/lms/api/add/"+"<?php //echo $level;?>//"; // the script where you handle the form input.
+//        $.ajax({
+//            type: "POST",
+//            enctype:"multipart/form-data",
+//            url: url,
+//            data: $("#idForm").serialize(), // serializes the form's elements.
+//            success: function(data)
+//            {
+//                alert(data); // show response from the php script.
+//            }
+//        });
+//        e.preventDefault(); // avoid to execute the actual submit of the form.
+//    });
+
+//    $("#idForm").submit(function(e) {
+//
+//        var formData = new FormData($(this)[0]);
+//
+////        this.preventDefault();
+//
+//        $.post($(this).attr("action"), formData, function(data) {
+//            alert(data);
+//        });
+//
+//        alert("lol");
+//        e.preventDefault();
+//        console.log(e);
+//
+//        return false;
+//    });
+
 
     $("#idForm").submit(function(e) {
         var url = "/lms/api/add/"+"<?php echo $level;?>"; // the script where you handle the form input.
