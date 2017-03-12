@@ -137,5 +137,22 @@ class AdminController
         include "view/admin.php";
     }
 
+    function editUser(){
+        $user = $_SESSION['user'];
+
+        if(isset($_REQUEST['edit'])) {
+            $student = new \User();
+            $user->name=$_REQUEST['studentName'];
+            $user->email=$_REQUEST['studentEmail'];
+            $user->gender=$_REQUEST['male'];
+            $user->country=$_REQUEST['country'];
+            $user->signature=$_REQUEST['studentSignature'];
+
+
+            $user->update();
+            exit();
+        }
+
+    }
 
 }
