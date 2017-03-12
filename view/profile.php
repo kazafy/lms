@@ -5,7 +5,7 @@ include "nav.php";
 ?>
 
 <div class="row">
-    <form action="/profile/" method="post">
+    <form action="/profile/" method="post" enctype="multipart/form-data">
 
     <div class="col l5 offset-l2">
         <div class="row">
