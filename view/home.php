@@ -717,7 +717,7 @@ $('#modal').modal('open');
 //
 //        return false;
 //    });
-
+/*
 
     $("#idForm").submit(function(e) {
         var url = "/lms/api/add/"+"<?php echo $level;?>"; // the script where you handle the form input.
@@ -732,6 +732,6 @@ $('#modal').modal('open');
         });
         e.preventDefault(); // avoid to execute the actual submit of the form.
     });
-
+*/
 </script>
 

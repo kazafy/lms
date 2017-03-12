@@ -99,10 +99,10 @@ class MainController
                 break;
             case 2 :
                     $className=$blocls[$level];
-                    $childclassName=$blocls[$level+1];
+                 
                     $temp = $className::fetchname($blockName)[0];
                     echo $temp->path;
-                    var_dump($_SERVER);
+                   
 
                       header("Location: $temp->path");
                       die;
@@ -151,7 +151,7 @@ readfile($file_url);
         $blok= $ref->newInstance();
         $blok->id=$id;
         $blok->delete();
-
+header('Location: '.$_SERVER['HTTP_REFERER']);
 
 
     }
@@ -239,7 +239,7 @@ readfile($file_url);
         }
 
 
-        header("Location: ".$_SERVER['HTTP_REFERER']);
+header('Location: '.$_SERVER['HTTP_REFERER']);
         exit();
 
 
@@ -286,16 +286,29 @@ readfile($file_url);
             $file_type=$_FILES['file']['type'];
             $file_ext=strtolower(end(explode('.',$_FILES['file']['name'])));
 
-            $expensions= array("jpeg","jpg","png");
+            $expensions= [];
+            $types=\Course_Type::fetchcourseid($_REQUEST['parent']);
+            
+            foreach($types as $t1 ){
+                $myty=\Type::fetchid($t1->typeid)[0];
+                $expensions[]=$myty->extension;
+                if(".".$file_ext==$myty->extension){
+                    $material->typeid=$myty->id;
+                }
+            }
 
-            if(in_array($file_ext,$expensions)=== false){
+;
+
+
+            if(in_array(".".$file_ext,$expensions)=== false){
+
                 $errors[]="extension not allowed, please choose a JPEG or PNG file.";
             }
 
             if($file_size > 2097152){
                 $errors[]='File size must be excately 2 MB';
             }
-
+            $file_name= rand(0,8000)."".time().md5($file_name).".".$file_ext;
             if(empty($errors)==true){
                 move_uploaded_file($file_tmp,"uploads/".$file_name);
                 $material->path="/lms/uploads/".$file_name;
@@ -308,7 +321,7 @@ readfile($file_url);
 
         $material->courseid = $_REQUEST['parent'];
 
-        $material->typeid=1;
+       // $material->typeid=1;
         $material->insert();
         $result =(object)["status"=>1];
         return $result;
