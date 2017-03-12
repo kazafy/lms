@@ -63,6 +63,7 @@ route('/lms/api/comments/get/(.*)', function($matches){
     $mainController->sendcomments($matches[1][0]);
     exit;
 });
+
 route('/lms/api/comments/submit/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
@@ -72,6 +73,7 @@ route('/lms/api/comments/submit/(.*)', function($matches){
     $mainController->submitcomments($matches[1][0]);
     exit;
 });
+
 route('/lms/api/comments/delete/(.*)', function($matches){
     header("Access-Control-Allow-Origin:*");
     header("Access-Control-Allow-Headers:origin,X-Request-With,Content-Type,Accept,");
@@ -81,11 +83,13 @@ route('/lms/api/comments/delete/(.*)', function($matches){
     $mainController->deletecomment($matches[1][0]);
     exit;
 });
+
 route('/lms/', function($matches){
 
 
     include "index.php";
 });
+
 route('/lms/login/(.*)', function($matches){
 
     $loginController = new \controller\LoginController();
@@ -98,6 +102,17 @@ route('/lms/register/(.*)', function($matches){
     $registerController->registerHandler();
     exit;
 });
+
+route('/lms/profile/', function($matches){
+    checkLogin();
+    $adminController = new \controller\AdminController();
+    $adminController->editUser();
+    $user = $_SESSION['user'];
+    include ("view/profile.php");
+    exit;
+});
+
+
 
 route('/lms/admin/user/list/', function($matches){
     checkAdmin();
