@@ -34,10 +34,10 @@ class Model{
 
     public function __construct() {
 
-        $dbhost="localhost";
-        $dbname="Project";
-        $uname="kazafy";
-        $password="";
+        $dbhost="us-cdbr-iron-east-03.cleardb.net";
+        $dbname="heroku_4b4f16b3c3893f8";
+        $uname="b062867c375ead";
+        $password="8968985f";
 
         $me=new Reflectionclass($this);
         $allprop=$me->getDefaultProperties();
