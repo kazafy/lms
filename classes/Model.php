@@ -36,7 +36,7 @@ class Model{
 
         $dbhost="localhost";
         $dbname="Project";
-        $uname="root";
+        $uname="kazafy";
         $password="";
 
         $me=new Reflectionclass($this);
@@ -157,7 +157,6 @@ class Model{
         $tname= $allprop["tablename"];
         $pk= $allprop["id"];
         $query="SELECT * from $tname where $pk = ?";
-        echo $query;
         $prep = self::$db->prepare($query);
         $prep->execute([$id]);
         $all=$prep->fetchAll(PDO::FETCH_ASSOC);

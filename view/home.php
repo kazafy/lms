@@ -29,9 +29,14 @@ include "nav.php";
             <!--center -->
             <div id="center" class="col s12  m12 l12 ">
 
-                <?php foreach ($blocks as $block) { ?>
+                <?php foreach ($blocks as $block) {
+
+                    if(isset($block->viewable) && $block->viewable==0)
+                        continue;
+                    ?>
 
                     <!--card-->
+
 
                 <div  class="col s12 m6 l4" >
                     <div class="card horizontal hoverable">
@@ -48,7 +53,8 @@ include "nav.php";
                                 {
                                     ?>
                                 <a class="left com" href="<?=$block->id?>"><i class="material-icons">textsms</i></a>
-                                 <a class="  btn-block waves-effect waves-light "
+
+                                 <a class=" btn-block waves-effect waves-light " <?=(isset($block->downloadable) && $block->downloadable==0)?"disabled":"" ?>
                                        href="/lms/material/download/<?php echo $block->id;?>/"><i class="material-icons">play_for_work</i></a>
                                         <a class="  viewme btn-block waves-effect waves-light "
                                        href="<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>"><i class="material-icons">pageview</i></a>
@@ -113,6 +119,25 @@ include "nav.php";
                                         </div>
                                         <?php
                                     }
+                                }
+                                else if($level == 1){
+                                    ?>
+
+
+                                    <div class="input-field">
+
+                                        <input name="d" <?=($block->downloadable==0)?'checked':'';?> value="1" type="checkbox" id="d<?=$block->id; ?>"/>
+                                        <label for="d<?=$block->id; ?>">Downloadable</label>
+                                    </div>
+                                    <div class="input-field">
+
+                                        <input name="v" <?=($block->viewable==0)?'checked':'';?> value="1" type="checkbox" id="v<?=$block->id; ?>"/>
+                                        <label for="v<?=$block->id; ?>">Viewable</label>
+                                    </div>
+
+
+                                    <?php
+
                                 }
                                 ?>
                                 </form>
@@ -382,9 +407,9 @@ include "nav.php";
     </div>
      </div>
   </div>
-        
 
-        
+
+
 
 
 
