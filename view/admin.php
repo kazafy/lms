@@ -51,7 +51,7 @@ include "nav.php";
                     <span class="title"><b><?= $request->creatorid->name; ?></b></span>
                     <?= $request->title;?>
                     <?= $request->body;?></p>
-                    <a href="/lms/request/delete/<?=$request->id?>" class="secondary-content"><i class="material-icons">delete</i></a>
+                    <a href="/request/delete/<?=$request->id?>" class="secondary-content"><i class="material-icons">delete</i></a>
                 </li>
                 <?php } ?>
             </ul>
@@ -61,7 +61,7 @@ include "nav.php";
 
 
     <div class="card hoverable" >
-    <form name="myform" id="myform" action="/lms/admin/user/update/0" method="post" >
+    <form name="myform" id="myform" action="/admin/user/update/0" method="post" >
         <table class="highlight centered bordered">
             <thead>
             <tr>
@@ -110,7 +110,7 @@ include "nav.php";
                         <td><a onclick='submitform("<?=$user->id?>");'   class='waves-effect waves-light btn-block'>
                                 <i class="material-icons">save</i>
                                 </a></td>
-                        <td><a href='/lms/admin/user/list/' class='waves-effect waves-light btn-block'>
+                        <td><a href='/admin/user/list/' class='waves-effect waves-light btn-block'>
                                 <i class="material-icons">cancel</i>
                                </a></td>
                         </tr>
@@ -133,10 +133,10 @@ include "nav.php";
 
                         </td>
 
-                        <td><a href='/lms/admin/user/update/<?= $user->id; ?>'  class='right  btn-block waves-effect waves-light '>
+                        <td><a href='/admin/user/update/<?= $user->id; ?>'  class='right  btn-block waves-effect waves-light '>
                                 <i class="material-icons">edit</i>
                                 </a></td>
-                        <td><a href='/lms/admin/user/delete/<?= $user->id;?>' class='waves-effect waves-light btn-block'>
+                        <td><a href='/admin/user/delete/<?= $user->id;?>' class='waves-effect waves-light btn-block'>
                                 <i class="material-icons">delete</i>
                                 </a></td>
                         </tr>

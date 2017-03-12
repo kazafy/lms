@@ -10,6 +10,16 @@
     }
 </style>
 
+
+
+
+
+
+
+
+
+<?php if(! empty($user)){ ?>
+
 <div class="fixed-action-btn">
 <!--    <a class="btn-floating btn-large red">-->
 <!--        <i class="large material-icons">mode_edit</i>-->
@@ -21,11 +31,12 @@
 <!--        <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>-->
 <!--    </ul>-->
 
-    <a href="/lms/api/requests/submit/" class="req btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+    <a href="/api/requests/submit/" class="req btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
 
 </div>
 
 
+<?php } ?>
 
 <footer class="page-footer black">
 <!--    <div class="container">-->

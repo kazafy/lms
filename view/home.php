@@ -55,7 +55,7 @@ include "nav.php";
                                 <a class="left com" href="<?=$block->id?>"><i class="material-icons">textsms</i></a>
 
                                  <a class=" btn-block waves-effect waves-light " <?=(isset($block->downloadable) && $block->downloadable==0)?"disabled":"" ?>
-                                       href="/lms/material/download/<?php echo $block->id;?>/"><i class="material-icons">play_for_work</i></a>
+                                       href="/material/download/<?php echo $block->id;?>/"><i class="material-icons">play_for_work</i></a>
                                         <a class="  viewme btn-block waves-effect waves-light "
                                        href="<?php echo $_SERVER['REQUEST_URI']; echo $block->name;?>"><i class="material-icons">pageview</i></a>
                                 <?php 
@@ -66,7 +66,7 @@ include "nav.php";
                                     ?>
                                     <a onclick='editblock(<?= $block->id?>)' class="right  btn-block waves-effect waves-light "><i class="material-icons">edit</i></a>
                                     <a class="right btn-block  waves-effect waves-light "
-                                       href="/lms/<?php echo $block->tablename;?>/delete/<?php echo $block->id;?>"><i class="material-icons">delete</i></a>
+                                       href="/<?php echo $block->tablename;?>/delete/<?php echo $block->id;?>"><i class="material-icons">delete</i></a>
 
                                     <?php
                                 }elseif(! empty($user) && $user->id == $block->creatorid)
@@ -179,7 +179,7 @@ include "nav.php";
                 </div>
 
                 <div id="newblock"  class="col s12 m6 l4 hide">
-                    <form id="idForm" method="post" action="/lms/api/add/<?php echo $level;?>"  enctype="multipart/form-data" >
+                    <form id="idForm" method="post" action="/api/add/<?php echo $level;?>"  enctype="multipart/form-data" >
 
                     <div class="card  hoverable">
 
@@ -357,7 +357,7 @@ include "nav.php";
 
 
 <div id="modal2" class="modal">
-    <iframe scrolling=0 class="viewobj" src="/lms/10.pdf"></iframe>
+    <iframe scrolling=0 class="viewobj" src="/10.pdf"></iframe>
     </div>
 
 
@@ -479,7 +479,7 @@ console.log($('#selected'));
 console.log({body:$('#Request').val(),title:$('#reqtitle').val(),type:$('#selected').val()});
   e.preventDefault();
  
-  var url = "/lms/api/requests/submit/";
+  var url = "/api/requests/submit/";
         $.ajax({
             type: "POST",
             url: url,
@@ -521,7 +521,7 @@ $("#subcomment").submit(
 console.log (this);
 
   e.preventDefault();
-  var url = "/lms/api/comments/submit/"+currmodal;
+  var url = "/api/comments/submit/"+currmodal;
         $.ajax({
             type: "POST",
             url: url,
@@ -536,7 +536,7 @@ console.log (this);
         });
   console.log($(this));
       $(this)[0].reset();
- url = "/lms/api/comments/get/"+currmodal;
+ url = "/api/comments/get/"+currmodal;
 refreshcomments(url);
        
 e.preventDefault();
@@ -581,7 +581,7 @@ function refreshcomments(url){
                                var link=$("<a>");
                                link.addClass('right');
                                 link.addClass('waves-effect waves-light');
-                                link.attr("href",'/lms/api/comments/delete/'+mydata[i].id);
+                                link.attr("href",'/api/comments/delete/'+mydata[i].id);
                                 var myi=$("<i>");
                                 link.click(function kek(e){
                                    
@@ -671,7 +671,7 @@ $('#modal2').modal('open');
  $(".com").click(
    function(e){
 currmodal=$(this).attr('href');
-  var url = "/lms/api/comments/get/"+currmodal;
+  var url = "/api/comments/get/"+currmodal;
 refreshcomments(url);
 e.preventDefault();
 //$(this).
@@ -712,7 +712,7 @@ $('#modal').modal('open');
     }
 
 //    $("#idForm").submit(function(e) {
-//        var url = "/lms/api/add/"+"<?php //echo $level;?>//"; // the script where you handle the form input.
+//        var url = "/api/add/"+"<?php //echo $level;?>//"; // the script where you handle the form input.
 //        $.ajax({
 //            type: "POST",
 //            enctype:"multipart/form-data",
@@ -745,7 +745,7 @@ $('#modal').modal('open');
 /*
 
     $("#idForm").submit(function(e) {
-        var url = "/lms/api/add/"+"<?php echo $level;?>"; // the script where you handle the form input.
+        var url = "/api/add/"+"<?php echo $level;?>"; // the script where you handle the form input.
         $.ajax({
             type: "POST",
             url: url,

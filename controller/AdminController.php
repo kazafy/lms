@@ -39,7 +39,7 @@ class AdminController
 //            $request->user = \User::Fetch($request->creatorid);
             $user = \User::Fetch(53);
             $request->creatorid = $user;
-            $request->creatorid->picture ="/lms/uploads/k.jpg";
+            $request->creatorid->picture ="/uploads/k.jpg";
         }
 
         $action = 1;
@@ -52,7 +52,7 @@ class AdminController
         $request = \Request::Fetch($id);
         $request->delete();
 
-        header("Location: http://localhost/lms/admin/user/list/");
+        header("Location: /admin/user/list/");
 
     }
 
@@ -77,7 +77,7 @@ class AdminController
 //            $request->user = \User::Fetch($request->creatorid);
             $user = \User::Fetch(53);
             $request->creatorid = $user;
-            $request->creatorid->picture ="/lms/uploads/k.jpg";
+            $request->creatorid->picture ="/uploads/k.jpg";
         }
 
         $categoryNumbers = count(\Category::Fetchall());
@@ -109,7 +109,7 @@ class AdminController
 //            $request->user = \User::Fetch($request->creatorid);
             $user = \User::Fetch(53);
             $request->creatorid = $user;
-            $request->creatorid->picture ="/lms/uploads/k.jpg";
+            $request->creatorid->picture ="/uploads/k.jpg";
         }
 
 
@@ -148,9 +148,45 @@ class AdminController
             $user->country=$_REQUEST['country'];
             $user->signature=$_REQUEST['studentSignature'];
 
-            $user->update();
 
-           header("Location: http://localhost/lms/home/");
+if(isset($_FILES['browsePicture'])){
+            $errors= array();
+            $file_name = $_FILES['browsePicture']['name'];
+            $file_size =$_FILES['browsePicture']['size'];
+            $file_tmp =$_FILES['browsePicture']['tmp_name'];
+            $file_type=$_FILES['browsePicture']['type'];
+            $file_ext=strtolower(end(explode('.',$_FILES['browsePicture']['name'])));
+
+
+            if(in_array($file_ext,["jpeg","jpg","png",])=== false){
+
+                $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+            }
+
+            if($file_size > 2097152){
+                $errors[]='File size must be excately 2 MB';
+            }
+            $file_name= rand(0,8000)."".time().md5($file_name).".".$file_ext;
+            if(empty($errors)==true){
+                move_uploaded_file($file_tmp,"/uploads/".$file_name);
+               $user->picture="/uploads/".$file_name;
+            }else{
+                $imgErr = " cant upload the file !";
+                $valide = false;
+            }
+
+
+
+
+}
+var_dump($_FILES);
+
+
+
+
+            $user->update();
+die();
+           header("Location: /views/");
             exit();
 
         }

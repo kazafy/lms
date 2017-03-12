@@ -5,7 +5,7 @@ include "nav.php";
 ?>
 
 <div class="row">
-    <form action="/lms/profile/" method="post">
+    <form action="/profile/" method="post" enctype="multipart/form-data">
 
     <div class="col l5 offset-l2">
         <div class="row">
@@ -40,11 +40,11 @@ include "nav.php";
                         <br>
                     </div>
 
-                     <input value="1"  id="test1" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==0) echo "checked";?> />
+                     <input value="1"  id="test1" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==1) echo "checked";?> />
                      <label for="test1">Male</label>
 
 
-                    <input value="0"  id="test2" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==1) echo "checked";?>/>
+                    <input value="0"  id="test2" name="male" type="radio"  <?php if (isset($user->gender) && $user->gender==0) echo "checked";?>/>
                     <label for="test2">Female</label>
 
             </div>
@@ -55,7 +55,7 @@ include "nav.php";
                 <i class="material-icons prefix">language</i>
                 <select name="country">
                     <option value="" disabled <?php if (empty($user->country)) echo "selected";?>>Choose your country</option>
-                    <option value="ISmaliah" <?php if (isset($user->country) && $user->country=="ISmaliah") echo "selected";?>>ISmaliah</option>
+                    <option value="Ismaliah" <?php if (isset($user->country) && $user->country=="Ismaliah") echo "selected";?>>ISmaliah</option>
                     <option value="Cairo" <?php if (isset($user->country) && $user->country=="Cairo") echo "selected";?>>Cairo</option>
                     <option value="Portsaid" <?php if (isset($user->country) && $user->country=="Portsaid") echo "selected";?>>Portsaid</option>
                 </select>
@@ -99,7 +99,7 @@ include "nav.php";
             <div class="card-panel grey lighten-5 z-depth-1">
                 <div class="row">
                     <div class="col s12">
-                        <img src="<?php echo '/lms';if (!empty($user->picture)){ echo $user->picture;}else {echo '/uploads/images.png'; }?>"  class="circle responsive-img" > <!-- notice the "circle" class -->
+                        <img src="<?php if (!empty($user->picture)){ echo $user->picture;}else {echo '/uploads/images.png'; }?>"  class="circle responsive-img" > <!-- notice the "circle" class -->
                     </div>
 
                     <div class="row">

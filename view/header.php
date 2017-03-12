@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 
 <!--    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-    <link href="http://localhost/lms/css/icon.css?family=Material+Icons" rel="stylesheet">
+    <link href="/css/icon.css?family=Material+Icons" rel="stylesheet">
     <style>
         /* label focus color */
         .input-field input:focus + label {
