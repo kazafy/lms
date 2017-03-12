@@ -7,7 +7,7 @@
 
 
 
-<?php if($level>=0){ ?>
+<?php if(! empty($user)){ ?>
 
 <div class="fixed-action-btn">
 <!--    <a class="btn-floating btn-large red">-->
